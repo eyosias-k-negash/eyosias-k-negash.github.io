@@ -1,0 +1,39 @@
+# > name: Name of your Dev Tool
+# > weight: Describes how good you know the tool - values from 1 up to 5
+#
+# Example of a Dev Tool
+# - name: Git
+#   weight: 5
+
+- name: Docker
+  weight: 4
+- name: IDA
+  weight: 3
+- name: Ghidra
+  weight: 1
+- name: Burp
+  weight: 4
+- name: Postman
+  weight: 2
+- name: npm
+  weight: 1
+- name: Chrome DevTools
+  weight: 3
+- name: Git
+  weight: 3
+- name: Postman
+  weight: 3
+- name: zsh
+  weight: 5
+- name: marker
+  weight: 2
+- name: openssl
+  weight: 1
+- name: curl
+  weight: 3
+- name: nmap
+  weight: 1
+- name: Sublime
+  weight: 2
+- name: Snort
+  weight: 2

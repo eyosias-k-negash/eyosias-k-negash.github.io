@@ -1,0 +1,130 @@
+# > title: Name of your timeline entry, university or work place
+# > title-url: Link to your timeline entry, university or work place
+# > date: Time span
+# > subtitle: The description under the title
+# > tags: List of tags you want to associate with the entry
+# > timeline-side: The side on which you want to display the entry: left or right
+
+# Example of a timeline entry
+# - title: airbnb
+#   title-url: https://example.com/
+#   date: Sep 2019 - Present
+#   subtitle: Fullstack Developer
+#   tags:
+#     - tag: React
+#     - tag: Javascript
+#     - tag: Ruby
+#     - tag: Rails
+#   timeline-side: right
+
+# - title: 
+#   title-url: 
+#   date: Sep 2019 - Present
+#   subtitle: 
+#   tags:
+#     - tag: React
+#     - tag: 
+#   timeline-side: right
+
+- title: INSA
+  title-url: https://www.insa.gov.et/web/guest/home
+  date: FEB 2021 - PRESENT
+  subtitle: RED TEAM LEAD - Information Network Security Agency
+  tags:
+    - tag: Security Analyst
+    - tag: Penetration Testing
+  timeline-side: left
+
+- title: INSA
+  title-url: https://www.insa.gov.et/web/guest/home
+  date: JAN 2020 - JAN 2021
+  subtitle: Malware Analyst - Information Network Security Agency
+  tags:
+    - tag: Malware Analysis
+    - tag: Open Source Intelligence
+  timeline-side: left
+
+- title: CADI
+  title-url: https://chilot.me/wp-content/uploads/2021/06/Regulation-No.-401-2017-Cyber-Army-Development-Institute-Establishment.pdf
+  date: NOV 2018 - APR 2019
+  subtitle: Cyber Army Development Institute
+  tags:
+    - tag: CURRICULUM DEVELOPMENT
+  timeline-side: right
+
+- title: CYBER SECURITY ANALYST
+  title-url: 
+  date: AUG 2018
+  subtitle: CYBER SECURITY ANALYST Course Certification
+  tags:
+    - tag: SIMU-LAB SUITE
+    - tag: CYBINT
+    - tag: BARBI
+  timeline-side: left
+
+- title: CYBER INTELLIGENCE COURSE
+  title-url: 
+  date: AUG 2018
+  subtitle: CYBER SECURITY ANALYST Course Certification
+  tags:
+    - tag: CYBINT
+    - tag: BARBI
+    - tag: Threat Intillegence
+    - tag: Malware Analysis
+  timeline-side: left
+
+- title: EBC
+  title-url: https://ebc.et/
+  date: JUN 2016 - AUG 2016
+  subtitle: IT/NETWORK TECHNICIAN - Ethiopian Broadcast Corporation
+  tags:
+    - tag: Networking
+  timeline-side: right
+
+- title: EDNA High Tech Solutions
+  title-url: https://www.ednahts.com
+  date: JAN 2016 - MAR 2016
+  subtitle: JUNIOR PROGRAMMER
+  tags:
+    - tag: Python
+    - tag: Odoo
+    - tag: Code Moding
+  timeline-side: left
+
+- title: ETHERNET
+  title-url: https://ethernet.edu.et/
+  date: JAN 2016 - FEB 2016
+  subtitle: SECURITY RESEARCHER - Worldwide network of Universities
+  tags:
+    - tag: Incident Response
+    - tag: NIDS
+    - tag: Network Security
+  timeline-side: right
+
+- title: CISCO ACADEMY Certification
+  title-url: https://www.netacad.com/courses/networking/ccna-switching-routing-wireless-essentials
+  date: SEP 2015 - JUL 2017
+  subtitle: 
+  tags:
+    - tag: CISCO
+    - tag: Networking
+  timeline-side: left
+
+- title: AAIT
+  title-url: http://aait.edu.et
+  date: SEP 2014 to JUN 2017 
+  subtitle: BACHELOR OF SCIENCE - Addis Ababa Institute of Technology Information Technology
+  tags:
+    - tag: security
+    - tag: networking
+    - tag: coding
+    - tag: maintainence
+  timeline-side: right
+
+- title: Gibson Prep High
+  title-url: 
+  date: JUL 2013
+  subtitle: HIGH SCHOOL DIPLOMA - Gibson School Systems
+  tags:
+    - tag: Natural Sciences
+  timeline-side: left

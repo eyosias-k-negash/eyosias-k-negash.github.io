@@ -1,0 +1,21 @@
+# > name: Name of your framework
+# > weight: Describes how good you know the framework - values from 1 up to 5
+#
+# Example of a framework
+# - name: Framework
+#   weight: 5
+
+- name: The API Platform
+  weight: 3
+- name: Laravell
+  weight: 2
+- name: Node
+  weight: 2
+- name: Express
+  weight: 1
+- name: Odoo
+  weight: 1
+- name: Jango
+  weight: 2
+- name: Flask
+  weight: 3
