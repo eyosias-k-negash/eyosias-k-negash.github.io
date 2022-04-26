@@ -81,7 +81,7 @@ show_contact_card: true
 # contact_title: The will be displayed as the title in the Contact section
 contact_title: Contact Me
 # contact_description: This will be displayed under the title.
-contact_description: Ideas to Collaborative on, questions, suggestions, advice, or Just want to say hi? Fell free to contact me at these addresses.
+contact_description: Have ideas to Collaborative on. Questions, suggestions, advice, or Just want to say hi? Fell free to contact me at these addresses.
 
 # GITHUB-METADATA
 # Set this to your forked repository
