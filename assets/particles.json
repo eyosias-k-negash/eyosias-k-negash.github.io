@@ -8,7 +8,9 @@
       }
     },
     "color": {
-      "value": ["#dc052d"]
+      "value": [
+        "#dc052d",
+        "#209fe4" ]
     },
     "shape": {
       "type": "polygon",
@@ -17,11 +19,11 @@
         "color": "#000000"
       },
       "polygon": {
-        "nb_sides": 4
+        "nb_sides": 6
       }
     },
     "opacity": {
-      "value": 0.7,
+      "value": 0.5,
       "random": true,
       "anim": {
         "enable": false,
@@ -62,7 +64,7 @@
     "detect_on": "canvas",
     "events": {
       "onhover": {
-        "enable": false
+        "enable": true
       },
       "onclick": {
         "enable": true,

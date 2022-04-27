@@ -4,7 +4,8 @@
 # title: This will be displayed as the website's name in your browser tab.
 title: "eyosias, Me"
 # description: This will be meta HTML tag content. This can be ignored.
-description: A Cyber Security enthusiast working to improve the sector in Ethiopia, Africa.
+description: A Certfied, Self taught security professional with multiple years of exprience in both technical work and team dynamics. Highly motvated & focused on making a carrer in Information Security.
+  # A Cyber Security enthusiast working to improve the sector in Ethiopia.
 # baseurl: The subpath of your site
 # > set this to "", if you renamed the repository to <user>.github.io
 # baseurl: "/neumorphism"
@@ -30,7 +31,7 @@ twitter_username: eyosiasknegash
 # show_aboutme_card:
 # > setting this to true, will display the About Me section
 # > setting this to false, will omit the About Me section
-show_aboutme_card: true
+show_aboutme_card: false
 # about_me_title: The will be displayed as the title in the About Me section
 about_me_title: About Me
 # about_me_description: This will be displayed under the title.
