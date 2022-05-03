@@ -1,0 +1,27 @@
+{% if site.show_blogs_card %}
+  <h1 class="title" id="blogs">{{site.blogs_title}}</h1>
+  <div class="projects-wrapper">
+    {% for post in site.posts %}
+      {% if post.live %}
+        <div class="project neumorphism-card" data-aos="slide-in-left">
+          <div class="name-link-wrapper">
+            <h3>{{ post.title }}</h3>
+            <div class="links">
+            </div>
+          </div>
+          <p class="project-desc">{{post.tldr}}</p>
+          <a class="highlight-link" href="{{post.url}}" target="_blank" rel="noreferrer">
+            Read More
+          </a>
+          <!-- {% if page.tags %}
+            <div class="tag-wrapper">
+              {% for topic in repository.topics %}
+                <span class="tag neumorphism-card">{{topic}}</span>
+              {% endfor %}
+            </div>
+          {% endif %} -->
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

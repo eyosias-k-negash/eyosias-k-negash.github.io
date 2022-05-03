@@ -116,14 +116,12 @@ google-analytics:
   # id: "UA-158757509-2"
 
 # Blog SECTION
-# show_aboutme_card:
-# > setting this to true, will display the About Me section
-# > setting this to false, will omit the About Me section
-show_aboutme_card: false
+# show_blogs_card:
+# > setting this to true, will display the blogs
+# > setting this to false, will omit the blogs section
+show_blogs_card: true
 # about_me_title: The will be displayed as the title in the About Me section
-about_me_title: About Me
-# about_me_description: This will be displayed under the title.
-about_me_description: 
+blogs_title: Techinical Write-ups
 
 ### END OF VALUES YOU SHOULD CHANGE ###
 

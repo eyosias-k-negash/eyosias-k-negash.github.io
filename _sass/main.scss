@@ -824,6 +824,15 @@ a {
     }
   }
 
+  .blogs-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    > * {
+      width: 28%;
+    }
+  }
+
   .contact-icons .social-link {
     width: 4rem;
     height: 4rem;
@@ -867,6 +876,12 @@ a {
       width: 45%;
     }
   }
+
+  .blogs-wrapper {
+    > * {
+      width: 30%;
+    }
+  }
 }
 
 @media only screen and (min-width: $large-screen) {
@@ -895,6 +910,12 @@ a {
   .projects-wrapper {
     > * {
       width: 46%;
+    }
+  }
+
+  .blogs-wrapper {
+    > * {
+      width: 32%;
     }
   }
 }

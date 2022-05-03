@@ -47,6 +47,11 @@
         {% include section-skills.html %}
       </section>
     {% endif %}
+    {%if site.show_blogs_card %}
+      <section class="card neumorphism-card-big">
+        {% include section-blogs.html %}
+      </section>
+    {% endif %}
     {%if site.show_projects_card %}
       <section class="card neumorphism-card-big">
         {% include section-projects.html %}
