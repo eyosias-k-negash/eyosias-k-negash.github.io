@@ -1,6 +1,6 @@
 setTimeout(function() {
   fadeOutPreloader(document.getElementById('preloader'), 69);
-}, 1500);
+}, 50);
 
 $(document).ready(function() {
   $(window).on('beforeunload', function() {
@@ -8,7 +8,7 @@ $(document).ready(function() {
   });
 
   /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-  particlesJS.load('landing', 'assets/particles.json', function() {});
+  particlesJS.load('landing', '/assets/particles.json', function() {});
 
   // Typing Text
   var element = document.getElementById('txt-rotate');
@@ -16,7 +16,7 @@ $(document).ready(function() {
   var period = element.getAttribute('data-period');
   setTimeout(function() {
     new TxtRotate(element, JSON.parse(toRotate), period);
-  }, 1500);
+  }, 1200);
 
   // INJECT CSS
   var css = document.createElement('style');
@@ -40,7 +40,7 @@ $(document).ready(function() {
 /* FUNCTIONS */
 /* Preloader */
 
-function fadeOutPreloader(element, duration) {
+function fadeOutPreloaderaa(element, duration) {
   opacity = 1;
 
   interval = setInterval(function() {
@@ -88,7 +88,7 @@ TxtRotate.prototype.tick = function() {
   this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
 
   var that = this;
-  var delta = 200 - Math.random() * 100;
+  var delta = 10 - Math.random() * 10;
 
   if (this.isDeleting) {
     delta /= 5;

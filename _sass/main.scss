@@ -752,6 +752,7 @@ a {
     .timeline {
       margin: 0 auto;
       width: 39.25rem;
+      margin-bottom: 0;
     }
 
     .timeline li:after {
@@ -783,6 +784,7 @@ a {
 
       .desc {
         text-align: right;
+        position: relative;
       }
     }
 
