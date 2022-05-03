@@ -258,6 +258,7 @@ DEPENDENCIES
   dotenv
   github-pages
   jekyll
+  jekyll-commonmark-ghpages
   jekyll-github-metadata
 
 BUNDLED WITH

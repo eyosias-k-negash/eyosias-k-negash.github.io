@@ -2,13 +2,15 @@
 
 # GENERAL SITE SETTINGS
 # title: This will be displayed as the website's name in your browser tab.
-title: "eyosias, Me"
+title: "eyosias"
 # description: This will be meta HTML tag content. This can be ignored.
 description: A Certfied, Self taught security professional with multiple years of exprience in both technical work and team dynamics. Highly motvated & focused on making a carrer in Information Security.
   # A Cyber Security enthusiast working to improve the sector in Ethiopia.
 # baseurl: The subpath of your site
 # > set this to "", if you renamed the repository to <user>.github.io
 # baseurl: "/neumorphism"
+
+markdown: CommonMarkGhPages
 
 # LANDING PAGE
 # username: This will displayed on the landing page as your name.
@@ -18,7 +20,7 @@ username: eyosias
 typing_text: In the security game for the cool Hollywood movie hacking montages :)
  # <a href="https://www.youtube.com/watch?v=iik25wqIuFo"> </a>
 # email: Your E-Mail address for the email button.
-email: eyosias.k.negash+personal-site@gmail.com
+email: eyosias.k.negash+utm_personal-site@gmail.com
 # For every social button you want to display, set your username or userid
 # If you do not use one of the following websites, then leave it empty
 github_username: eyosias-k-negash
@@ -43,7 +45,7 @@ about_me_description: A Certfied, Self taught security professional with multipl
 # > setting this to false, will omit the Skills section
 show_skills_card: true
 # skills_title: The will be displayed as the title in the Skills section
-skills_title: Skills
+skills_title: picked up Along the way
 
 # TIMELINE SECTION
 # show_timeline_card:
@@ -112,6 +114,16 @@ projects:
 # > set this to "", if you do not want to track with Google Analytics
 google-analytics:
   # id: "UA-158757509-2"
+
+# Blog SECTION
+# show_aboutme_card:
+# > setting this to true, will display the About Me section
+# > setting this to false, will omit the About Me section
+show_aboutme_card: false
+# about_me_title: The will be displayed as the title in the About Me section
+about_me_title: About Me
+# about_me_description: This will be displayed under the title.
+about_me_description: 
 
 ### END OF VALUES YOU SHOULD CHANGE ###
 
