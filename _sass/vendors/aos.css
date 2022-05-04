@@ -869,9 +869,11 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   transform: translate3d(100px, 0, 0) scale(1.2);
 }
 [data-aos^=slide][data-aos^=slide] {
-  transition-property: transform;
+  opacity: 0;
+  transition-property: opacity, transform;
 }
 [data-aos^=slide][data-aos^=slide].aos-animate {
+  opacity: 1;
   transform: translateZ(0);
 }
 [data-aos=slide-up] {
