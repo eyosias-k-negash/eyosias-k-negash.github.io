@@ -13,13 +13,13 @@
           <a class="highlight-link" href="{{post.url}}" target="_blank" rel="noreferrer">
             Read More
           </a>
-          <!-- {% if page.tags %}
+          {% if post.tags %}
             <div class="tag-wrapper">
-              {% for topic in repository.topics %}
-                <span class="tag neumorphism-card">{{topic}}</span>
+              {% for tag in post.tags %}
+                <span class="tag neumorphism-card">{{ tag.tag }}</span>
               {% endfor %}
             </div>
-          {% endif %} -->
+          {% endif %}
         </div>
       {% endif %}
     {% endfor %}
