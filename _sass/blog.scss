@@ -1,0 +1,55 @@
+ /* The navigation bar */
+.layout #blog_navbar {
+  background: linear-gradient(172deg,#2b2d2fe3 0%, #209fe419 28%,#ff073a0e 92%),
+              linear-gradient(0deg,#2b2d2fe3 0%, #2b2d2f9e 28%,#2b2d2faa 92%);
+  overflow: hidden;
+  /*background-color: #333;*/
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0%; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  left: 0;
+}
+
+.layout:after{
+  background: linear-gradient(18deg,#ff073a 0,#209fe4 8%,#000 92%,#f3f3f3);
+  content: " ";
+  width: 100%;
+  top: 100%;
+  margin-top: -.0675rem;
+  position: fixed;
+  height: .125rem;
+  z-index: 0;
+}
+
+#blog_navbar #navbar_contents{
+  max-width: 80em;
+  margin: .5rem auto;
+}
+
+#nav_title{
+  float: left;
+}
+
+#navbar_contents h1, #navbar_contents span{
+  margin: 0;
+}
+
+/* Links inside the navbar */
+#blog_navbar #navbar_contents a{
+  float: right;
+  padding: 14px 16px;
+  color: #f2f2f2;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Change background on mouse-over */
+#blog_navbar #navbar_contents a:hover {
+  background: #000;
+  color: #ff073a;
+}
+
+
+.blogs-wrapper { display: flex; flex-wrap: wrap; justify-content: space-between; > * {  width: 28%; } }
+.blogs-wrapper { > * {  width: 30%; } }
+.blogs-wrapper { > * {  width: 32%; } }
