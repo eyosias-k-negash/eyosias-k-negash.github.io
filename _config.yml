@@ -37,7 +37,7 @@ show_aboutme_card: false
 # about_me_title: The will be displayed as the title in the About Me section
 about_me_title: About Me
 # about_me_description: This will be displayed under the title.
-about_me_description: A Certfied, Self taught security professional with multiple years of exprience in both technical work and team dynamics. Highly motvated & focused on making a carrer in Information Security.
+about_me_description: A Self-taught cyber security professional with multiple years of experience in technical work and team dynamics. Highly motivated & focused on cultivating a career in Information Security.
 
 # SKILLS SECTION
 # show_skills_card:
