@@ -1,7 +1,8 @@
+<script type="text/javascript" src="{{ "/assets/js/custom.js" | prepend: site.baseurl }}"></script>
 <div id="landing">
   <div class="landing-title">
     <h1>Hi, I&#39;m
-      <span class="highlight-title">{{site.username}}</span>.
+      <span class="highlight-title" data-rotate='[{% for pseudonym in site.pseudonyms %}{"name":"{{ pseudonym.name }}", "color":"{{ pseudonym.color }}"},{% endfor %}1]' data-text="{{site.pseudonyms[0].name}}">{{site.pseudonyms[0].name}}</span>.
     </h1>
     <h1>
       <span id="txt-rotate" data-period="2000"

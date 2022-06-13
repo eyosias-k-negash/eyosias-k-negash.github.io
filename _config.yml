@@ -123,6 +123,13 @@ show_blogs_card: true
 # about_me_title: The will be displayed as the title in the About Me section
 blogs_title: Techinical Write-ups
 
+# Landing Page
+# pseudonyms
+pseudonyms:
+    - {name: eyosias, color: var(--red-color) }
+    - {name: surface, color: var(--blue-color) }
+    - {name: pseudonym, color: "#001133"}
+
 ### END OF VALUES YOU SHOULD CHANGE ###
 
 plugins:
