@@ -18,9 +18,9 @@
   position: absolute;
   content: attr(data-text);
   text-shadow: 0px 0px 20px var(--pseudonym-color);
-  filter: blur(10px) brightness(0.30);
+  filter: blur(10px) brightness(1.30);
   animation: flicker (random(2)+2)+s linear infinite;
-  animation-delay: 4s;
+  animation-delay: 5s;
 }
 
 @keyframes flicker {
@@ -58,6 +58,6 @@
     filter: blur(5px) brightness(0.10);
   }
   100% {
-    filter: blur(5px) brightness(1);
+    filter: blur(5px) brightness(10);
   }
 }
