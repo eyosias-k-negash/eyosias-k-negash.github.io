@@ -10,7 +10,13 @@ description: A Certfied, Self taught security professional with multiple years o
 # > set this to "", if you renamed the repository to <user>.github.io
 # baseurl: "/neumorphism"
 
-markdown: CommonMarkGhPages
+markdown: kramdown
+
+kramdown:
+  syntax_highlighter: coderay
+  syntax_highlighter_opts:
+    line_numbers: table
+    bold_every: 5
 
 # LANDING PAGE
 # username: This will displayed on the landing page as your name.
