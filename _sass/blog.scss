@@ -1,3 +1,5 @@
+$medium-screen: 62em !default;
+
  /* The navigation bar */
 .layout #blog_navbar {
   background: linear-gradient(172deg,#2b2d2fe3 0%, #209fe419 28%,#ff073a0e 92%),
@@ -53,3 +55,18 @@
 .blogs-wrapper { display: flex; flex-wrap: wrap; justify-content: space-between; > * {  width: 28%; } }
 .blogs-wrapper { > * {  width: 30%; } }
 .blogs-wrapper { > * {  width: 32%; } }
+
+@media only screen and (max-width: $medium-screen) {
+  a#nav_blogs {
+    display: none;
+  }
+  div#small_screen_filler {
+    width: 100%;
+    height: 10vh
+  }
+}
+
+h1,h2,h3{
+  overflow-x: auto;
+  overflow-y: clip;
+}

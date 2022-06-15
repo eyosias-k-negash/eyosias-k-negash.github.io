@@ -9,9 +9,9 @@
       <span>{{ page.date | date: "%b %d, %Y" }}</span>
     </div>
     {%if page.show_contact_card %}
-      <a href="#contacts">Contact</a>
+      <a id="nav_contacts" href="#contacts">Contact</a>
     {% endif %}
-    <a href="/#blogs">Blogs</a>
-    <a href="{{ "/" | prepend: site.baseurl }}">Home</a>
+    <a id="nav_blogs" href="/#blogs">Blogs</a>
+    <a id="nav_home" href="{{ "/" | prepend: site.baseurl }}">Home</a>
   </div>
 </div> 
