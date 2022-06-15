@@ -61,3 +61,13 @@
     filter: blur(5px) brightness(10);
   }
 }
+
+#landing canvas {
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom,black 80%,transparent 90%);
+  mask-image: linear-gradient(to bottom,black 80%,transparent 90%);
+}
+
+.landing-title {
+  z-index: 1;
+}
