@@ -13,6 +13,7 @@ description: A Certfied, Self taught security professional with multiple years o
 markdown: kramdown
 
 kramdown:
+  use_coderay: true
   syntax_highlighter: coderay
   syntax_highlighter_opts:
     line_numbers: table
