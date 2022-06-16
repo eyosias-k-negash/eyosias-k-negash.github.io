@@ -11,6 +11,7 @@ description: A Certfied, Self taught security professional with multiple years o
 # baseurl: "/neumorphism"
 
 markdown: kramdown
+highlighter: coderay
 
 kramdown:
   use_coderay: true
