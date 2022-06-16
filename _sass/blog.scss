@@ -72,7 +72,7 @@ h1,h2,h3{
 }
 
 /* markdown fenced codeblock horizontal scroll */
-table.CodeRay{
+div.CodeRay{
   overflow: auto; 
   display: inline-block;
   width: 100%;

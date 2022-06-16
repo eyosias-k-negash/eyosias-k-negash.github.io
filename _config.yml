@@ -14,10 +14,7 @@ markdown: kramdown
 kramdown:
   enable_coderay: true
   syntax_highlighter: coderay
-  syntax_highlighter_opts:
-    line_numbers: table
-    bold_every: 5
-
+  
 # LANDING PAGE
 # username: This will displayed on the landing page as your name.
 username: eyosias
