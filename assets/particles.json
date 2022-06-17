@@ -48,9 +48,9 @@
     "move": {
       "enable": true,
       "speed": 1,
-      "direction": "bottom",
+      "direction": "top",
       "random": true,
-      "straight": false,
+      "straight": true,
       "out_mode": "out",
       "bounce": false,
       "attract": {
