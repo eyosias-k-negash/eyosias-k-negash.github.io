@@ -23,7 +23,7 @@ username: eyosias
 typing_text: In the security game thanks to those hacking montages in Hollywood movies :)
  # <a href="https://www.youtube.com/watch?v=iik25wqIuFo"> </a>
 # email: Your E-Mail address for the email button.
-email: eyosias.k.negash+utm_personal-site@gmail.com
+email: eyosias.k.negash@gmail.com
 # For every social button you want to display, set your username or userid
 # If you do not use one of the following websites, then leave it empty
 github_username: eyosias-k-negash
@@ -125,13 +125,6 @@ google-analytics:
 show_blogs_card: true
 # about_me_title: The will be displayed as the title in the About Me section
 blogs_title: Techinical Write-ups
-
-# Landing Page
-# pseudonyms
-pseudonyms:
-    - {name: eyosias, color: var(--red-color) }
-    - {name: surface, color: var(--blue-color) }
-    - {name: pseudonym, color: "#001133"}
 
 ### END OF VALUES YOU SHOULD CHANGE ###
 

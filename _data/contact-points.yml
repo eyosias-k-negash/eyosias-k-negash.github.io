@@ -1,0 +1,16 @@
+- name: G-Mail
+  class: email
+  link: mailto:eyosias.k.negash+utm_personal-site@gmail.com
+  icon: /assets/img/solid.svg#envelope
+- name: Linked In
+  class: linkedin
+  link: https://www.linkedin.com/
+  icon: /assets/img/brands.svg#linkedin-in
+- name: Twitter
+  class: twitter
+  link: https://twitter.com/messages/compose?recipient_id=907220728801632256
+  icon: /assets/img/brands.svg#twitter
+- name: Telegram
+  class: telegram
+  link: https://t.me/oossas
+  icon: /assets/img/brands.svg#telegram-plane

@@ -1,0 +1,6 @@
+- name: eyosias
+  color: "var(--red-color)"
+- name: surface
+  color: "var(--blue-color)"
+- name: pseudonym
+  color: "#001133"
