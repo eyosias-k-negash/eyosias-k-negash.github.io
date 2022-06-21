@@ -12,8 +12,15 @@ description: A Certfied, Self taught security professional with multiple years o
 
 markdown: kramdown
 kramdown:
-  enable_coderay: true
-  syntax_highlighter: coderay
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'syntax'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
   
 # LANDING PAGE
 # username: This will displayed on the landing page as your name.
