@@ -2,5 +2,5 @@
   color: "var(--red-color)"
 - name: surface
   color: "var(--blue-color)"
-- name: pseudonym
+- name: rega
   color: "#001133"
