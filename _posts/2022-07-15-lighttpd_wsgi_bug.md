@@ -91,6 +91,7 @@ In the system described above the use of this header will cause a potential Auth
 The catch here is that the headers below the payload and any custom headers added by the proxy will be pending on the input socket as the body of the request. If the business logic expects a certain format in the body of the request this extra input will muck it up and might neutralize the bypass.
 	
 ## demo bug light httpd + wsgi server
+https://github.com/eyosias-k-negash/trunc_headers_vuln_demo.git
 ![demo](https://github.com/eyosias-k-negash/trunc_headers_vuln_demo/raw/master/demo%202022-07-15%2003-14.gif){: width="100%"}
 	
 	
