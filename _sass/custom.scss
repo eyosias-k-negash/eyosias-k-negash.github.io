@@ -12,6 +12,13 @@
 .landing-title h1 span.highlight-title{
   color: var(--pseudonym-color);
   position: relative;
+  font-family: neon-glow;
+  }
+
+@font-face {  
+  font-family: neon-glow;
+  src: url("/assets/Neon_Glow.ttf") format('truetype');
+  font-style: normal;
 }
 
 .landing-title h1 span.highlight-title::before {

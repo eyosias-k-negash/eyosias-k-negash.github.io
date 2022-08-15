@@ -6,11 +6,10 @@ layout: post
 show_contact_card: true
 no_nav_bar: false
 live: true
-tldr: This blog is about a Root RCE on an old SMC router product that has passed its EOL and is catalogued at CVE-2020-13776.
+tldr: A bug potentially becomes an Auth Bypass issue when an application is setup behind a reverse proxy that handles the authentication by adding “Authentication-Me” header when it is required.
 tags:
   - tag: Infosec
   - tag: Vunleribility Research
-  - tag: blog
 ---
 
 # An Auth Bypass Bug saved on a Technicality
@@ -81,8 +80,7 @@ When it splits the header to name and value pair using `:` as a separator, it us
 Our payload on the other hand has the `:` seperator on the first index 0 which trips up the code and make it think there is no separator. Hence returning false. Meanwhile on the calling function when `isheader` returns false the function cites bad seek and breaks out of the parsing loop. This is why header parsing stops on our payload and anything that comes after it is left in the input socket unprocessed later to be erroneously identified as request body.
 	
 proxy processing
-	[TODO] look into Lighttpd Header parsing code 
-		- stressing hte proxy should not have passed along such a bad header
+	In the next  blog we will look into Lighttpd Header parsing code as the proxy should not have passed along such a bad header.
 
 ## <a id="potential-Exploitation-of-the-bug">Potential Exploitation of the bug</a>
 
@@ -98,4 +96,3 @@ The catch here is that the headers below the payload and any custom headers adde
 ## Takeaways
 - Be aware of the pitfalls of outdated versions or software. especially when they 
 - Wonder why proxy allowed such a header to pass through.
-	

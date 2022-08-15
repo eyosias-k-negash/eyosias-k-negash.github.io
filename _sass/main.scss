@@ -697,28 +697,28 @@ a {
 
   #skills {
     div[skill-weight="1"] {
-      font-size: 1rem;
+      font-size: 0.5rem;
       line-height: 0rem;
     }
 
     div[skill-weight="2"] {
+      font-size: 1rem;
+      line-height: 0.5rem;
+    }
+
+    div[skill-weight="3"] {
       font-size: 2rem;
       line-height: 1rem;
     }
 
-    div[skill-weight="3"] {
+    div[skill-weight="4"] {
       font-size: 3rem;
       line-height: 2rem;
     }
 
-    div[skill-weight="4"] {
-      font-size: 4rem;
-      line-height: 3rem;
-    }
-
     div[skill-weight="5"] {
-      font-size: 5rem;
-      line-height: 4rem;
+      font-size: 4rem;
+      line-height: 5rem;
     }
 
     .filter-button {

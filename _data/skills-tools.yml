@@ -21,8 +21,6 @@
   weight: 3
 - name: Git
   weight: 3
-- name: Postman
-  weight: 3
 - name: zsh
   weight: 5
 - name: marker
