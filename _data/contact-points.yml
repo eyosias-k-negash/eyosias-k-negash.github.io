@@ -4,7 +4,7 @@
   icon: /assets/img/solid.svg#envelope
 - name: Linked In
   class: linkedin
-  link: https://www.linkedin.com/
+  link: https://www.linkedin.com/in/eyosias-k-negash/
   icon: /assets/img/brands.svg#linkedin-in
 - name: Twitter
   class: twitter

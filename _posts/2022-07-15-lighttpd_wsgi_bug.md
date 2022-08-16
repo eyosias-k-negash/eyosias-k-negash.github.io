@@ -6,7 +6,7 @@ layout: post
 show_contact_card: true
 no_nav_bar: false
 live: true
-tldr: A bug potentially becomes an Auth Bypass issue when an application is setup behind a reverse proxy that handles the authentication by adding “Authentication-Me” header when it is required.
+tldr: A potential Auth Bypass bug when an application is setup behind a reverse proxy that handles the authentication...
 tags:
   - tag: Infosec
   - tag: Vunleribility Research
