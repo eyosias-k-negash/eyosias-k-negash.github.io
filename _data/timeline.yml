@@ -26,6 +26,24 @@
 #     - tag: 
 #   timeline-side: right
 
+- title: Turing 
+  title-url: https://www.turing.com/
+  date: Sep 2024 - Present
+  subtitle: Data analyst - Turing
+  tags:
+    - tag: Python
+    - tag: LLM
+  timeline-side: left
+
+- title: KERBIT
+  title-url: https://www.kerbit.io
+  date: NOV 2022 - PRESENT
+  subtitle: SECURITY ANALYST - Kerbit
+  tags:
+    - tag: Security Analyst
+    - tag: Trainings & Certifications
+  timeline-side: right
+
 - title: INSA
   title-url: https://www.insa.gov.et/web/guest/home
   date: FEB 2021 - PRESENT

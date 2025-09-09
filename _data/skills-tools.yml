@@ -35,3 +35,32 @@
   weight: 2
 - name: Snort
   weight: 2
+
+- name: PBKDF2
+  weight: 1
+- name: PEP8
+  weight: 1
+- name: DNS
+  weight: 1
+- name: shell_escape
+  weight: 1
+- name: TTL
+  weight: 1
+- name: DKIM
+  weight: 1
+- name: SPF
+  weight: 1
+- name: CNAME
+  weight: 1
+- name: CSP
+  weight: 1
+- name: XSS
+  weight: 1
+- name: OLAP
+  weight: 1
+- name: OLTP
+  weight: 1
+- name: SQL-92
+  weight: 1
+- name: FCM
+  weight: 1
