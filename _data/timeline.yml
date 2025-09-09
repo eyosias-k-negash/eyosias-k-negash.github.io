@@ -28,15 +28,26 @@
 
 - title: Turing 
   title-url: https://www.turing.com/
-  date: Sep 2024 - Present
-  subtitle: Data analyst - Turing
+  date: MAY 2023 - Present
+  subtitle: Lead Data analyst; pioneering LLM based solutions
   tags:
     - tag: Python
     - tag: LLM
+    - tag: RLHF
+  timeline-side: left
+
+- title: Microsoft 
+  title-url: https://www.turing.com/
+  date: MAY - Jul 2025
+  subtitle: Code analyst; powering LLM based solutions
+  tags:
+    - tag: Python
+    - tag: LLM
+    - tag: NOVELAI
   timeline-side: left
 
 - title: KERBIT
-  title-url: https://www.kerbit.io
+  title-url: https://www.kerbit.io/
   date: NOV 2022 - PRESENT
   subtitle: SECURITY ANALYST - Kerbit
   tags:
