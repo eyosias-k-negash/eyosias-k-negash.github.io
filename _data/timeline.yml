@@ -46,6 +46,15 @@
     - tag: NOVELAI
   timeline-side: left
 
+- title: Stableduel
+  title-url: https://stableduel.com/
+  date: JAN - APR 2023
+  subtitle: DevOps/Backend Engineer - Stableduel
+  tags:
+    - tag: Azure
+    - tag: Cloud Logs
+  timeline-side: right
+
 - title: KERBIT
   title-url: https://www.kerbit.io/
   date: NOV 2022 - PRESENT
@@ -57,7 +66,7 @@
 
 - title: INSA
   title-url: https://www.insa.gov.et/web/guest/home
-  date: FEB 2021 - PRESENT
+  date: FEB 2021 - NOV 2022
   subtitle: RED TEAM LEAD - Information Network Security Administration
   tags:
     - tag: Security Analyst
