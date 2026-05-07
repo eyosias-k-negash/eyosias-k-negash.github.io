@@ -39,11 +39,11 @@
 - name: PBKDF2
   weight: 1
 - name: PEP8
-  weight: 1
+  weight: 2
 - name: DNS
   weight: 1
 - name: shell_escape
-  weight: 1
+  weight: 2
 - name: TTL
   weight: 1
 - name: DKIM
@@ -68,7 +68,7 @@
 - name: Bambda
   weight: 1
 - name: TOCTOU
-  weight: 1
+  weight: 2
 - name: IDNs
   weight: 1
 - name: ISO14443-A
@@ -88,8 +88,6 @@
 - name: DTB
   weight: 1
 - name: FCC ID
-  weight: 1
-- name: Kubernetes
   weight: 1
 - name: Terraform
   weight: 1

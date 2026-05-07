@@ -19,3 +19,5 @@
   weight: 2
 - name: Flask
   weight: 3
+- name: Kubernetes
+  weight: 4
