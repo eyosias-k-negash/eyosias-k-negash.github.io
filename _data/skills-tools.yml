@@ -64,3 +64,32 @@
   weight: 1
 - name: FCM
   weight: 1
+
+- name: Bambda
+  weight: 1
+- name: TOCTOU
+  weight: 1
+- name: IDNs
+  weight: 1
+- name: ISO14443-A
+  weight: 1
+- name: PKCE
+  weight: 1
+- name: IDP
+  weight: 1
+- name: SPA
+  weight: 1
+- name: RATS
+  weight: 1
+- name: NXP
+  weight: 1
+- name: UBI
+  weight: 1
+- name: DTB
+  weight: 1
+- name: FCC ID
+  weight: 1
+- name: Kubernetes
+  weight: 1
+- name: Terraform
+  weight: 1
