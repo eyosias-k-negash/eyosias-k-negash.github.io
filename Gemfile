@@ -10,3 +10,4 @@ end
 
 
 gem "rouge", "~> 3.19"
+gem "erb"

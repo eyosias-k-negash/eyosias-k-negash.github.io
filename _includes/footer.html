@@ -29,6 +29,29 @@
   gtag('config', 'UA-232062888-1');
 </script>
 
+<!-- thesys.dev -->
+<script type="module">
+  import { embedWidget } from "https://cdn.jsdelivr.net/npm/agent-embed-widget/dist/agent-embed-widget.es.js";
+
+  embedWidget({
+    type: "chatbar",
+    url: "https://console.thesys.dev/app/X6akTappRBwUQG6MtXkc-",
+    theme: "light", // "dark" or "light". this currently only affects the widget toggle button's appearance
+    hideLogin: true,
+    options: {
+      theme: {
+        containerFills: "#171113",
+        strokeDefault: "rgba(255, 255, 255, 0.06)",
+        roundedL: "12px",
+        primaryText: "rgba(249, 236, 241, 1)",
+        interactiveAccent: "rgba(225, 29, 72, 1)",
+        accentPrimaryText: "rgba(255, 255, 255, 1)",
+        roundedS: "8px",
+      },
+    },
+  });
+</script>
+
 <!-- <script>
   var dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
   if (dnt != "1" && dnt != "yes") {
