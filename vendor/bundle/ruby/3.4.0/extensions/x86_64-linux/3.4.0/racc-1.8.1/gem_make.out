@@ -1,0 +1,18 @@
+current directory: /home/rega/eyosias-k-negash.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/usr/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/rega/eyosias-k-negash.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260515-720305-ius0t7 sitelibdir\=./.gem.20260515-720305-ius0t7 clean
+
+current directory: /home/rega/eyosias-k-negash.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260515-720305-ius0t7 sitelibdir\=./.gem.20260515-720305-ius0t7
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/rega/eyosias-k-negash.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260515-720305-ius0t7 sitelibdir\=./.gem.20260515-720305-ius0t7 install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20260515-720305-ius0t7/racc
+
+current directory: /home/rega/eyosias-k-negash.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260515-720305-ius0t7 sitelibdir\=./.gem.20260515-720305-ius0t7 clean
