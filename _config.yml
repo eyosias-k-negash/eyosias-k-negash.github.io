@@ -4,7 +4,7 @@
 # title: This will be displayed as the website's name in your browser tab.
 title: "eyosias"
 # description: This will be meta HTML tag content. This can be ignored.
-description: Lead AI Trainer & Researcher at OpenAI/Turing | Specialized in SFT, RLHF, and Adversarial Red Teaming for Frontier LLMs & Autonomous Agents
+description: 9+ years of technical engineering experience spanning malware analysis, secure DevOps pipelines, and LLM alignment policy.
   # A Cyber Security enthusiast working to improve the sector in Ethiopia.
 # baseurl: The subpath of your site
 # > set this to "", if you renamed the repository to <user>.github.io
@@ -27,7 +27,7 @@ kramdown:
 username: eyosias
 # typing_text: This will be typed before 'scroll down for more'.
 # > set this to your job title, e.g. Fullstack Developer
-typing_text: 9+ years of technical engineering experience spanning malware analysis, secure DevOps pipelines, and LLM alignment policy.
+typing_text: Lead AI Trainer & Cybersecurity Specialist
  # <a href="https://www.youtube.com/watch?v=iik25wqIuFo"> </a>
 # email: Your E-Mail address for the email button.
 email: eyosias.k.negash@gmail.com
