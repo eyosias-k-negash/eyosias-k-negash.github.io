@@ -26,6 +26,15 @@
 #     - tag: 
 #   timeline-side: right
 
+- title: AWS Certified Cloud Practitioner
+  title-url: /certs/aws_certified_cloud_practitioner_certificate.pdf
+  date: MAR 2026
+  subtitle: Cloud Practitioner Certification
+  tags:
+    - tag: Cloud Concepts
+    - tag: Cloud Security
+  timeline-side: right
+
 - title: Turing 
   title-url: https://www.turing.com/
   date: MAY 2023 - Present
