@@ -100,7 +100,7 @@
   timeline-side: right
 
 - title: CYBER SECURITY ANALYST
-  title-url: 
+  title-url: /certs/Eyosias_Negash_CSA.pdf
   date: AUG 2018
   subtitle: CYBER SECURITY ANALYST Course Certification
   tags:
@@ -110,13 +110,13 @@
   timeline-side: left
 
 - title: CYBER INTELLIGENCE COURSE
-  title-url: 
+  title-url: /certs/Eyosias_Negash_Intelligence.pdf
   date: AUG 2018
-  subtitle: CYBER SECURITY ANALYST Course Certification
+  subtitle: CYBER INTELLIGENCE COURSE Certification
   tags:
     - tag: CYBINT
     - tag: BARBI
-    - tag: Threat Intillegence
+    - tag: Threat Intelligence
     - tag: Malware Analysis
   timeline-side: left
 
