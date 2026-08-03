@@ -26,10 +26,21 @@
 #     - tag: 
 #   timeline-side: right
 
+- title: Certified Kubernetes Administrator
+  title-url: /certs/loading.pdf
+  date: Upcoming
+  subtitle: Linux Foundation & Cloud Native Computing Foundation (CNCF) Certification
+  tags:
+    - tag: Containerization
+    - tag: Scaling
+    - tag: Orchestration
+    - tag: Cloud Native
+  timeline-side: right
+
 - title: AWS Certified Cloud Practitioner
   title-url: /certs/aws_certified_cloud_practitioner_certificate.pdf
   date: MAR 2026
-  subtitle: Cloud Practitioner Certification
+  subtitle: Amazon Web Services (AWS) Certification
   tags:
     - tag: Cloud Concepts
     - tag: Cloud Security
