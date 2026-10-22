@@ -1,2 +1,12 @@
-<h1 class="title">{{site.about_me_title}</h1>
-<p class="subtitle"><!-- data-aos="fade-down" -->{{site.about_me_description}}</p>
+<section id="about" class="section" data-window>
+  <div class="pane">
+    <span class="glass" aria-hidden="true"></span>
+    <div class="term-block" data-term>
+      {% include prompt.html cmd="cat ~/about.md" %}
+      <div class="out">
+        <h2 class="out-title"><span class="hash" aria-hidden="true"># </span>{{ site.about_me_title }}</h2>
+        <p class="plan">{{ site.about_me_description }}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -3,4 +3,4 @@
 - name: surface
   color: "var(--blue-color)"
 - name: rega
-  color: "#001133"
+  color: "var(--green-color)"

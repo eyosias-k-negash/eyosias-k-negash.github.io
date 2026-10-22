@@ -1,127 +1,59 @@
-<script type="text/javascript" src="{{ "/assets/js/custom.js" | prepend: site.baseurl }}"></script>
-<div id="landing">
-  <div class="landing-title">
-    <h1>Hi, I&#39;m
-      <div style="position: static;display: inline;">
-        <span class="highlight-title" data-rotate='[{% for pseudonym in site.data.pseudonyms %}{"name":"{{ pseudonym.name }}", "color":"{{ pseudonym.color }}"},{% endfor %}1]' data-text="{{site.data.pseudonyms[0].name}}">{{site.data.pseudonyms[0].name}}</span>.
-      </div>
-    </h1>
-    <h1>
-      <span id="txt-rotate" data-period="2000"
-        data-rotate='["{{site.typing_text}}", "scroll down for more."]'
-      >
-      </span>
-    </h1>
-    <div class="landing-icons">
-      <!-- {% if site.email != null %}
-        <a class="social-link email" aria-label="My E-Mail" href="mailto:{{site.email}}">
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/solid.svg#envelope" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">E-Mail</span>
-        </a>
-      {% endif %} -->
+{%- assign first_alias = site.data.pseudonyms[0].name | default: site.username -%}
+{%- capture rotate_lines -%}{{ site.typing_text }}|scroll down for more.{%- endcapture -%}
+{%- assign rotate_lines = rotate_lines | split: '|' -%}
+<section id="top" class="hero" data-window>
+  <p class="motd">Last login: {{ site.time | date: "%a %b %e %H:%M:%S %Y" }} on pts/0</p>
 
-      {% if site.show_blogs_card %}
-        <a class="social-link blog" aria-label="My Blogs" rel="noreferrer"
-          href="/#blogs"
-        >
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/solid.svg#blog" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">Blogs</span>
-        </a>
-      {% endif %}
-
-      {% if site.github_username != null %}
-        <a class="social-link github" aria-label="My GitHub" target="_blank" rel="noreferrer"
-          href="https://github.com/{{site.github_username}}"
-        >
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#github" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">GitHub</span>
-        </a>
-      {% endif %}
-
-      <!-- {% if site.codepen_username != null %}
-        <a class="social-link" aria-label="My Codepen" target="_blank" rel="noreferrer"
-          href="https://codepen.io/{{site.codepen_username}}"
-        >
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#codepen" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">CodePen</span>
-        </a>
-      {% endif %}
-
-      {% if site.dev_username != null %}
-        <a class="social-link" aria-label="My DEV" target="_blank" rel="noreferrer"
-          href="https://dev.to/{{site.dev_username}}"
-        >
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#dev" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">DEV</span>
-        </a>
-      {% endif %} -->
-
-      {% if site.linkedin_username != null %}
-        <a class="social-link linkedin" aria-label="My LinkedIn" target="_blank"
-          rel="noreferrer" href="https://www.linkedin.com/in/{{site.linkedin_username}}"
-        >
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#linkedin-in" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">LinkedIn</span>
-        </a>
-      {% endif %}
-
-      {% if site.twitter_username != null %}
-        <a class="social-link twitter" aria-label="My Twitter" target="_blank"
-          rel="noreferrer" href="https://twitter.com/{{site.twitter_username}}"
-        >
-          <svg viewBox="0 0 200 200" class="circle">
-            <circle cx="100" cy="100" r="80" />
-          </svg>
-          <div class="social">
-            <svg class="social-svg" viewBox="0 0 48 48">
-              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#twitter" | prepend: site.baseurl }}"></use>
-            </svg>
-          </div>
-          <span class="label">Twitter</span>
-        </a>
-      {% endif %}
+  <div class="term-block" data-term>
+    {% include prompt.html cmd="whoami" %}
+    <div class="out">
+      <h1 class="alias-line">
+        <button type="button" class="alias" title="su: switch user"
+          data-aliases="{{ site.data.pseudonyms | jsonify | escape }}"
+          data-text="{{ first_alias }}">{{ first_alias }}</button>
+        <span class="sr-only">({{ site.full_name }})</span>
+      </h1>
     </div>
   </div>
-</div>
+
+  <div class="term-block" data-term>
+    {% include prompt.html cmd="finger $(whoami)" %}
+    <div class="out">
+      <dl class="finger">
+        <div><dt>Login:</dt><dd class="ps1-user">{{ first_alias }}</dd></div>
+        <div><dt>Name:</dt><dd>{{ site.full_name }}</dd></div>
+        <div class="finger-wide">
+          <dt>Role:</dt>
+          <dd><span id="txt-rotate" data-period="2000" data-rotate="{{ rotate_lines | jsonify | escape }}">{{ site.typing_text }}</span></dd>
+        </div>
+        <div class="finger-wide">
+          <dt>Plan:</dt>
+          <dd class="plan">{{ site.description }}</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="term-block" data-term>
+    {% include prompt.html cmd="ls ~/links" %}
+    <div class="out">
+      <ul class="ls-grid">
+        {% if site.show_blogs_card %}
+          <li><a class="ls-dir" href="#writeups">writeups/</a></li>
+        {% endif %}
+        {% if site.github_username %}
+          <li><a class="ls-dir" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noreferrer">github/</a></li>
+        {% endif %}
+        {% if site.linkedin_username %}
+          <li><a class="ls-dir" href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noreferrer">linkedin/</a></li>
+        {% endif %}
+        {% if site.twitter_username %}
+          <li><a class="ls-dir" href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noreferrer">twitter/</a></li>
+        {% endif %}
+        {% if site.cv_download_link %}
+          <li><a class="ls-file" href="{{ site.cv_download_link | relative_url }}" target="_blank" rel="noreferrer">cv.pdf</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</section>

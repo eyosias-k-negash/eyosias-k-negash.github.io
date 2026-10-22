@@ -1,16 +1,25 @@
+# > name: Accessible label for the link
+# > class: Short key shown in the left column of `cat ~/contact.txt`
+# > handle: What the link reads as (falls back to name)
+# > link: Where it goes
+# > icon: Unused by the terminal theme; kept for reference
 - name: G-Mail
   class: email
+  handle: eyosias.k.negash@gmail.com
   link: mailto:eyosias.k.negash+utm_personal-site@gmail.com
   icon: /assets/img/solid.svg#envelope
 - name: Linked In
   class: linkedin
+  handle: in/eyosias-k-negash
   link: https://www.linkedin.com/in/eyosias-k-negash/
   icon: /assets/img/brands.svg#linkedin-in
 - name: Twitter
   class: twitter
+  handle: "@eyosiasknegash"
   link: https://twitter.com/messages/compose?recipient_id=907220728801632256
   icon: /assets/img/brands.svg#twitter
 - name: Telegram
   class: telegram
+  handle: "@oossas"
   link: https://t.me/oossas
   icon: /assets/img/brands.svg#telegram-plane

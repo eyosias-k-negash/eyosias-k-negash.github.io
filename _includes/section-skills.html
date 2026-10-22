@@ -1,28 +1,29 @@
-<h1 class="title">{{site.skills_title}}</h1>
-
-<div id="skills">
-<!--   <input type="radio" id="all" name="filter" checked />
-  <label class="filter-button neumorphism-button" for="all">All</label>
-  <input type="radio" id="language" name="filter" />
-  <label class="filter-button neumorphism-button" for="language">Languages</label>
-  <input type="radio" id="framework" name="filter" />
-  <label class="filter-button neumorphism-button" for="framework">Frameworks</label>
-  <input type="radio" id="tool" name="filter" />
-  <label class="filter-button neumorphism-button" for="tool">Tools</label> -->
-
-  {% for language in site.data.skills-languages %}
-    <div skill-type="language" skill-weight="{{language.weight}}" data-aos="zoom-in">
-      {{language.name}}
+<section id="skills" class="section" data-window>
+  <div class="pane">
+    <span class="glass" aria-hidden="true"></span>
+    <div class="term-block" data-term>
+      {% include prompt.html cmd="skills --cloud | shuf" %}
+      <div class="out">
+        <h2 class="out-title"><span class="hash" aria-hidden="true"># </span>{{ site.skills_title }}</h2>
+        <div class="skill-filter" role="group" aria-label="Filter skills by type">
+          <span class="dim" aria-hidden="true">--type=</span>
+          <button type="button" data-filter="all" aria-pressed="true">all</button>
+          <button type="button" data-filter="language" aria-pressed="false">lang</button>
+          <button type="button" data-filter="framework" aria-pressed="false">framework</button>
+          <button type="button" data-filter="tool" aria-pressed="false">tool</button>
+        </div>
+        <ul class="skill-cloud" data-filter="all">
+          {% for language in site.data.skills-languages %}
+            <li data-type="language" data-weight="{{ language.weight }}">{{ language.name }}</li>
+          {% endfor %}
+          {% for framework in site.data.skills-frameworks %}
+            <li data-type="framework" data-weight="{{ framework.weight }}">{{ framework.name }}</li>
+          {% endfor %}
+          {% for tool in site.data.skills-tools %}
+            <li data-type="tool" data-weight="{{ tool.weight }}">{{ tool.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-  {% endfor %}
-  {% for framework in site.data.skills-frameworks %}
-    <div skill-type="framework" skill-weight="{{framework.weight}}" data-aos="zoom-in">
-      {{framework.name}}
-    </div>
-  {% endfor %}
-  {% for tool in site.data.skills-tools %}
-    <div skill-type="tool" skill-weight="{{tool.weight}}" data-aos="zoom-in">
-      {{tool.name}}
-    </div>
-  {% endfor %}
-</div>
+  </div>
+</section>

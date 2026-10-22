@@ -3,7 +3,7 @@
 # GENERAL SITE SETTINGS
 # title: This will be displayed as the website's name in your browser tab.
 title: "eyosias"
-# description: This will be meta HTML tag content. This can be ignored.
+# description: Meta description, and the "Plan:" in the landing page `finger` output.
 description: 9+ years of technical engineering experience spanning malware analysis, secure DevOps pipelines, and LLM alignment policy.
   # A Cyber Security enthusiast working to improve the sector in Ethiopia.
 # baseurl: The subpath of your site
@@ -23,9 +23,11 @@ kramdown:
       start_line: 1
   
 # LANDING PAGE
-# username: This will displayed on the landing page as your name.
+# username: The host in every shell prompt (user@username:~$) and the tmux session name.
 username: eyosias
-# typing_text: This will be typed before 'scroll down for more'.
+# full_name: Shown in the `finger` output on the landing page and in the footer.
+full_name: Eyosias K. Negash
+# typing_text: The "Role:" line in the landing page `finger` output, typed before 'scroll down for more'.
 # > set this to your job title, e.g. Fullstack Developer
 typing_text: Lead AI Trainer & Cybersecurity Specialist
  # <a href="https://www.youtube.com/watch?v=iik25wqIuFo"> </a>
@@ -130,8 +132,8 @@ google-analytics:
 # > setting this to true, will display the blogs
 # > setting this to false, will omit the blogs section
 show_blogs_card: true
-# about_me_title: The will be displayed as the title in the About Me section
-blogs_title: Techinical Write-ups
+# blogs_title: The will be displayed as the title in the Blogs section
+blogs_title: Technical Write-ups
 
 ### END OF VALUES YOU SHOULD CHANGE ###
 
@@ -140,11 +142,8 @@ plugins:
 
 exclude:
   [
-    "_assets",
     "Gemfile",
     "Gemfile.lock",
-    "gulpfile.js",
-    "node_modules",
-    "package.json",
+    "README.md",
     "vendor",
   ]

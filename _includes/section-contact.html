@@ -1,14 +1,27 @@
-<h1 class="title">{{site.contact_title}}</h1>
-<p class="subtitle">{{site.contact_description}}</p>
-
-<div class="contact-icons" id="contacts">
-  {% for contact_point in site.data.contact-points %}
-    <a class="social-link {{ contact_point.class }}" aria-label="My {{ contact_point.name }}" href="{{ contact_point.link }}">
-      <div class="social">
-        <svg class="social-svg" viewBox="0 0 48 48">
-          <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ contact_point.icon | prepend: site.baseurl }}"></use>
-        </svg>
+<section id="contact" class="section" data-window>
+  <div class="pane">
+    <span class="glass" aria-hidden="true"></span>
+    <div class="term-block" data-term>
+      {% include prompt.html cmd="cat ~/contact.txt" %}
+      <div class="out">
+        <h2 class="out-title"><span class="hash" aria-hidden="true"># </span>{{ site.contact_title }}</h2>
+        <p class="comment"># {{ site.contact_description }}</p>
+        <dl class="contact-list">
+          {% for contact_point in site.data.contact-points %}
+            <div>
+              <dt>{{ contact_point.class }}</dt>
+              <dd>
+                <a href="{{ contact_point.link }}"{% unless contact_point.link contains 'mailto:' %} target="_blank" rel="noreferrer"{% endunless %}
+                  aria-label="{{ contact_point.name }}: {{ contact_point.handle | default: contact_point.name }}">{{ contact_point.handle | default: contact_point.name }}</a>
+              </dd>
+            </div>
+          {% endfor %}
+        </dl>
       </div>
-    </a>
-  {% endfor %}
-</div>
+    </div>
+    <p class="cmd cmd-idle" aria-hidden="true">
+      <span class="ps1"><span class="ps1-user">{{ site.data.pseudonyms[0].name | default: site.username }}</span><span class="ps1-at">@</span><span class="ps1-host">{{ site.username }}</span><span class="ps1-colon">:</span><span class="ps1-path">~</span><span class="ps1-sign">$</span></span>
+      <span class="cursor"></span>
+    </p>
+  </div>
+</section>
