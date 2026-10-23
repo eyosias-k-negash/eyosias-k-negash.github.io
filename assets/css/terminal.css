@@ -84,6 +84,11 @@ body {
   body { font-size: 0.9375rem; }
 }
 
+/* Phones stay at the browser's default size; the 10% zoom is for larger screens. */
+@media (max-width: 40rem) {
+  html { font-size: 100%; }
+}
+
 /* ambient field behind everything: what the glass panes blur and refract */
 body::before {
   content: "";
@@ -481,10 +486,19 @@ a:hover > .ls-target,
 a:focus-visible > .ls-name,
 a:focus-visible > .ls-target { text-decoration-style: solid; }
 
-/* On phones the names alone carry the link; the `-> target` addresses are just clutter. */
+/* On phones the names alone carry the link; the `-> target` addresses are just clutter.
+   Without them the landing links fit side by side, like plain `ls`. */
 @media (max-width: 40rem) {
   .ls-arrow,
   .ls-target { display: none; }
+
+  .ls-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 3ch;
+  }
+
+  .ls-links .ls-name { min-width: 0; }
 }
 
 /* Declassify: a bar in the link's own colour covers the label, then retracts
