@@ -12,7 +12,13 @@
             <li class="tree-node">
               <div class="node-head">
                 {% if event.title-url and event.title-url != '' %}
-                  <a class="ls-dir" href="{{ event.title-url | relative_url }}" target="_blank" rel="noreferrer">{{ event.title | slugify }}/</a>
+                  {%- comment -%} linked entries render as symlinks: name/ -> domain (or local path) {%- endcomment -%}
+                  {%- if event.title-url contains '://' -%}
+                    {%- assign link_target = event.title-url | split: '://' | last | split: '/' | first | remove_first: 'www.' -%}
+                  {%- else -%}
+                    {%- assign link_target = event.title-url | remove_first: '/' -%}
+                  {%- endif %}
+                  <a class="ls-link" href="{{ event.title-url | relative_url }}" target="_blank" rel="noreferrer"><span class="ls-name" data-redact>{{ event.title | slugify }}/</span><span class="ls-arrow"> -&gt; </span><span class="ls-target">{{ link_target }}</span></a>
                 {% else %}
                   <span class="ls-dir">{{ event.title | slugify }}/</span>
                 {% endif %}
@@ -35,7 +41,7 @@
           {% if site.cv_download_link %}
             <li class="tree-node">
               <div class="node-head">
-                <a class="ls-file cv-link" href="{{ site.cv_download_link | relative_url }}" download>{{ cv_file }}</a>
+                <a class="ls-file cv-link" href="{{ site.cv_download_link | relative_url }}" download><span data-redact>{{ cv_file }}</span></a>
                 <span class="comment">&larr; download cv</span>
               </div>
             </li>

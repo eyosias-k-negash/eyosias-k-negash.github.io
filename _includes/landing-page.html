@@ -35,23 +35,23 @@
   </div>
 
   <div class="term-block" data-term>
-    {% include prompt.html cmd="ls ~/links" %}
+    {% include prompt.html cmd="ls -l ~/links" %}
     <div class="out">
-      <ul class="ls-grid">
+      <ul class="ls-links">
         {% if site.show_blogs_card %}
-          <li><a class="ls-dir" href="#writeups">writeups/</a></li>
+          <li><span class="ls-perm">lrwxrwxrwx</span><a class="ls-link" href="#writeups"><span class="ls-name" data-redact>writeups</span><span class="ls-arrow"> -&gt; </span><span class="ls-target">~/writeups/</span></a></li>
         {% endif %}
         {% if site.github_username %}
-          <li><a class="ls-dir" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noreferrer">github/</a></li>
+          <li><span class="ls-perm">lrwxrwxrwx</span><a class="ls-link" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noreferrer"><span class="ls-name" data-redact>github</span><span class="ls-arrow"> -&gt; </span><span class="ls-target">github.com/{{ site.github_username }}</span></a></li>
         {% endif %}
         {% if site.linkedin_username %}
-          <li><a class="ls-dir" href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noreferrer">linkedin/</a></li>
+          <li><span class="ls-perm">lrwxrwxrwx</span><a class="ls-link" href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noreferrer"><span class="ls-name" data-redact>linkedin</span><span class="ls-arrow"> -&gt; </span><span class="ls-target">linkedin.com/in/{{ site.linkedin_username }}</span></a></li>
         {% endif %}
         {% if site.twitter_username %}
-          <li><a class="ls-dir" href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noreferrer">twitter/</a></li>
+          <li><span class="ls-perm">lrwxrwxrwx</span><a class="ls-link" href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noreferrer"><span class="ls-name" data-redact>twitter</span><span class="ls-arrow"> -&gt; </span><span class="ls-target">twitter.com/{{ site.twitter_username }}</span></a></li>
         {% endif %}
         {% if site.cv_download_link %}
-          <li><a class="ls-file" href="{{ site.cv_download_link | relative_url }}" target="_blank" rel="noreferrer">cv.pdf</a></li>
+          <li><span class="ls-perm">-rw-r--r--</span><a class="ls-file" href="{{ site.cv_download_link | relative_url }}" target="_blank" rel="noreferrer"><span class="ls-name" data-redact>cv.pdf</span></a></li>
         {% endif %}
       </ul>
     </div>

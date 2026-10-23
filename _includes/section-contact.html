@@ -12,7 +12,7 @@
               <dt>{{ contact_point.class }}</dt>
               <dd>
                 <a href="{{ contact_point.link }}"{% unless contact_point.link contains 'mailto:' %} target="_blank" rel="noreferrer"{% endunless %}
-                  aria-label="{{ contact_point.name }}: {{ contact_point.handle | default: contact_point.name }}">{{ contact_point.handle | default: contact_point.name }}</a>
+                  aria-label="{{ contact_point.name }}: {{ contact_point.handle | default: contact_point.name }}" data-redact>{{ contact_point.handle | default: contact_point.name }}</a>
               </dd>
             </div>
           {% endfor %}

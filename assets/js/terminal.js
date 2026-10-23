@@ -265,6 +265,143 @@
     }, { passive: true });
   }
 
+  /* Declassify: link labels ([data-redact]) are covered by a bar that then retracts
+     while the text unscrambles. Each plays once when first scrolled into view, then
+     an occasional random on-screen link repeats it. */
+
+  var GLYPHS = '!<>-_\\/[]{}=+*^?#$%&@01'; // ASCII only: every glyph is one monospace cell wide
+  var REDACT_MS = 1000;
+
+  // Screen readers keep the real label; only an aria-hidden copy gets scrambled.
+  function prepareLabel(el) {
+    var text = el.textContent;
+    var spoken = document.createElement('span');
+    var shown = document.createElement('span');
+    spoken.className = 'sr-only';
+    spoken.textContent = text;
+    shown.setAttribute('aria-hidden', 'true');
+    shown.textContent = text;
+    el.setAttribute('data-text', text);
+    el.textContent = '';
+    el.appendChild(spoken);
+    el.appendChild(shown);
+  }
+
+  function cancelRedact(el) {
+    if (!el.classList.contains('is-redacting')) return;
+    el.classList.remove('is-redacting');
+    el.lastChild.textContent = el.getAttribute('data-text');
+  }
+
+  function declassify(el) {
+    if (el.classList.contains('is-redacting')) return;
+    var text = el.getAttribute('data-text');
+    var shown = el.lastChild;
+    var start = performance.now();
+    var lastRoll = -1;
+    el.classList.add('is-redacting');
+
+    // Timeline (matches @keyframes redact): bar covers 0-200ms, holds to 500ms,
+    // retracts left to right 500-850ms; text resolves left to right 600-980ms.
+    var frame = function (now) {
+      if (!el.classList.contains('is-redacting')) return; // cancelled
+      var t = now - start;
+      if (t >= REDACT_MS) {
+        shown.textContent = text;
+        el.classList.remove('is-redacting');
+        return;
+      }
+      var roll = Math.floor(t / 55);
+      if (t >= 200 && roll !== lastRoll) {
+        lastRoll = roll;
+        var keep = Math.floor(Math.max(0, Math.min(1, (t - 600) / 380)) * text.length);
+        var out = text.slice(0, keep);
+        for (var i = keep; i < text.length; i++) {
+          out += text[i] === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        }
+        shown.textContent = out;
+      }
+      requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+
+  function initRedact() {
+    var labels = Array.prototype.slice.call(document.querySelectorAll('[data-redact]'));
+    if (!labels.length || reduceMotion || !('IntersectionObserver' in window)) return;
+    labels.forEach(prepareLabel);
+
+    var barHeight = function () {
+      var bar = document.querySelector('.statusbar');
+      return bar ? bar.getBoundingClientRect().bottom : 0;
+    };
+    var fullyVisible = function (el) {
+      var r = el.getBoundingClientRect();
+      return r.top >= barHeight() && r.bottom <= window.innerHeight && r.width > 0;
+    };
+    var outputShown = function (el) {
+      var block = el.closest('[data-term]');
+      return !block || block.classList.contains('is-done');
+    };
+    var engaged = function (el) {
+      var link = el.closest('a') || el;
+      return link.matches(':hover') || link.matches(':focus-within');
+    };
+
+    // First sighting: stagger labels that arrive together so they ripple rather than fire at once.
+    var nextAt = 0;
+    var stagger = function (el) {
+      var now = performance.now();
+      nextAt = Math.max(now, nextAt) + 70;
+      setTimeout(function () { if (!engaged(el)) declassify(el); }, nextAt - now);
+    };
+
+    var firstLook = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        firstLook.unobserve(el);
+        var block = el.closest('[data-term]');
+        if (block && !block.classList.contains('is-done')) {
+          block.addEventListener('term:done', function () { stagger(el); }, { once: true });
+        } else {
+          stagger(el);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    labels.forEach(function (el) { firstLook.observe(el); });
+
+    // Afterwards, sparsely: one random fully visible, idle link every 8-15s,
+    // never the same one twice in a row when there is a choice.
+    var last = null;
+    var ambient = function () {
+      setTimeout(function () {
+        if (!document.hidden) {
+          var pool = labels.filter(function (el) {
+            return !el.classList.contains('is-redacting') && outputShown(el) && fullyVisible(el) && !engaged(el);
+          });
+          if (pool.length > 1) pool = pool.filter(function (el) { return el !== last; });
+          if (pool.length) {
+            last = pool[Math.floor(Math.random() * pool.length)];
+            declassify(last);
+          }
+        }
+        ambient();
+      }, 8000 + Math.random() * 7000);
+    };
+    ambient();
+
+    // Never stand between the reader and a link they are reaching for.
+    var release = function (e) {
+      var link = e.target.closest && e.target.closest('a');
+      if (!link) return;
+      if (link.hasAttribute('data-redact')) cancelRedact(link);
+      link.querySelectorAll('[data-redact]').forEach(cancelRedact);
+    };
+    document.addEventListener('pointerover', release);
+    document.addEventListener('focusin', release);
+  }
+
   function init() {
     root.classList.add('term-ready');
     initTyping();
@@ -273,6 +410,7 @@
     initSkills();
     initStatusbar();
     initGlass();
+    initRedact();
   }
 
   if (document.readyState === 'loading') {

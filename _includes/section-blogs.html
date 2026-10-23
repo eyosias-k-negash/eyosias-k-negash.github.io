@@ -20,7 +20,7 @@
                   <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %e %Y" }}</time>
                   <span class="ls-name">{{ post.slug }}.md</span>
                 </span>
-                <span class="ls-title">{{ post.title }}</span>
+                <span class="ls-title" data-redact>{{ post.title }}</span>
                 {% if post.tldr %}<span class="ls-desc">{{ post.tldr }}</span>{% endif %}
                 {% if post.tags %}
                   <span class="ls-tags tags">

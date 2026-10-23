@@ -51,6 +51,7 @@ html {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-mono);
+  font-size: 110%; /* everything is sized in rem, so this is the page's zoom level */
   font-variant-ligatures: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -409,15 +410,25 @@ button { font: inherit; }
   .finger-wide { grid-column: 1 / -1; }
 }
 
-.ls-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 3ch;
+.ls-links {
+  display: grid;
+  gap: 0.1rem;
   padding: 0;
   list-style: none;
 }
 
+.ls-links li {
+  display: flex;
+  align-items: baseline;
+  gap: 2ch;
+}
+
+.ls-links .ls-perm { flex: none; color: var(--fg-dim); }
+.ls-links .ls-name { min-width: 8ch; }
+
+/* dircolors: directories blue, symlinks cyan, files green */
 .ls-dir,
+.ls-link,
 .ls-file {
   font-weight: 700;
   padding: 0 0.25ch;
@@ -425,11 +436,32 @@ button { font: inherit; }
 }
 
 .ls-dir { color: var(--blue-color); }
+.ls-link { color: var(--cyan); overflow-wrap: anywhere; }
 .ls-file { color: var(--green-color); }
 
-a.ls-dir:hover,
-a.ls-dir:focus-visible {
-  background: var(--blue-color);
+/* Links are symlinks: `name -> target`, dotted underline like a terminal hyperlink. */
+.ls-link .ls-name,
+.ls-link .ls-target,
+.ls-file .ls-name {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.ls-arrow {
+  color: var(--fg-dim);
+  font-weight: 400;
+  white-space: pre;
+}
+
+.ls-target {
+  color: var(--fg-dim);
+  font-weight: 400;
+}
+
+a.ls-link:hover,
+a.ls-link:focus-visible {
+  background: var(--cyan);
   color: var(--bg);
 }
 
@@ -438,6 +470,41 @@ a.ls-file:focus-visible {
   background: var(--green-color);
   color: var(--bg);
 }
+
+a.ls-link:hover .ls-arrow,
+a.ls-link:hover .ls-target,
+a.ls-link:focus-visible .ls-arrow,
+a.ls-link:focus-visible .ls-target { color: inherit; }
+
+a:hover > .ls-name,
+a:hover > .ls-target,
+a:focus-visible > .ls-name,
+a:focus-visible > .ls-target { text-decoration-style: solid; }
+
+/* On phones the names alone carry the link; the `-> target` addresses are just clutter. */
+@media (max-width: 40rem) {
+  .ls-arrow,
+  .ls-target { display: none; }
+}
+
+/* Declassify: a bar in the link's own colour covers the label, then retracts
+   while terminal.js unscrambles the text underneath. */
+[data-redact] {
+  position: relative;
+  display: inline-block;
+}
+
+[data-redact]::after {
+  content: "";
+  position: absolute;
+  inset: 0.2em -0.2ch;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+[data-redact].is-redacting::after { animation: redact 1s cubic-bezier(0.65, 0, 0.35, 1) both; }
 
 /* Glass panes
    Each section's content sits on a pane whose liquid-glass finish fades in on
@@ -731,9 +798,10 @@ section:target > .pane > .glass,
   font-size: 0.8125rem;
 }
 
-.ls-name { color: var(--fg-bright); }
+.ls-meta .ls-name { color: var(--fg-bright); }
 
 .ls-title {
+  justify-self: start; /* hug the text so the redaction bar matches it */
   color: var(--fg-bright);
   font-size: 1.15rem;
   font-weight: 700;
@@ -802,7 +870,13 @@ section:target > .pane > .glass,
   }
 }
 
-.panel-title a { color: inherit; }
+.panel-title a {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  color: inherit;
+}
 .panel:hover .panel-title a { color: var(--pseudonym-color); }
 
 .panel-desc { flex: 1; }
@@ -1144,6 +1218,14 @@ section:target > .pane > .glass,
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+@keyframes redact {
+  0%   { transform: scaleX(0); transform-origin: left; }
+  20%  { transform: scaleX(1); transform-origin: left; }
+  50%  { transform: scaleX(1); transform-origin: right; }
+  85%  { transform: scaleX(0); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
 }
 
 @keyframes reveal {

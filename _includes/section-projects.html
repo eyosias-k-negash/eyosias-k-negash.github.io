@@ -51,7 +51,7 @@
           {% unless site.projects.exclude.projects contains repository.name %}
             {% assign repo_count = repo_count | plus: 1 %}
             <li class="panel">
-              <h3 class="panel-title"><a href="{{ repository.html_url }}" target="_blank" rel="noreferrer">{{ repository.name }}</a></h3>
+              <h3 class="panel-title"><a href="{{ repository.html_url }}" target="_blank" rel="noreferrer" data-redact>{{ repository.name }}</a></h3>
               {% if repository.description and repository.description != '' %}
                 <p class="panel-desc">{{ repository.description }}</p>
               {% else %}
