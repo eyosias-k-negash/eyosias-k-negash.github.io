@@ -1,79 +1,56 @@
-<h1 class="title">{{site.timeline_title}}</h1>
-
-<div class="timeline-wrapper">
-  <ul class="timeline">
-    {% for event in site.data.timeline %}
-      {% if event.timeline-side == 'left' %}
-        <li>
-          <div class="direction-l">
-            <div class="flag-wrapper">
-              <span class="hexagon"></span>
-              <span class="flag neumorphism-button" data-aos="zoom-in-right">
-                <a href="{{event.title-url}}" target="_blank" rel="noreferrer">
-                  <span>{{event.title}}</span>
-                </a>
-              </span>
-              <span class="time-wrapper" data-aos="zoom-in-right">
-                <span class="time neumorphism-card">{{event.date}}</span>
-              </span>
-            </div>
-            <div class="desc neumorphism-card" data-aos="zoom-in-right">
-              {{event.subtitle}}
-              {% if event.tags %}
-                <div class="tag-wrapper">
-                  {% for tag in event.tags %}
-                    <span class="tag neumorphism-card">{{tag.tag}}</span>
-                  {% endfor %}
-                </div>
+{%- assign cv_file = site.cv_download_link | split: '/' | last -%}
+<section id="experience" class="section" data-window>
+  <div class="pane">
+    <span class="glass" aria-hidden="true"></span>
+    <div class="term-block" data-term>
+      {% include prompt.html cmd="tree ~/experience" %}
+      <div class="out">
+        <h2 class="out-title"><span class="hash" aria-hidden="true"># </span>{{ site.timeline_title }}</h2>
+        <p class="tree-root">~/experience</p>
+        <ul class="tree">
+          {% for event in site.data.timeline %}
+            <li class="tree-node">
+              <div class="node-head">
+                {% if event.title-url and event.title-url != '' %}
+                  {%- comment -%} linked entries render as symlinks: name/ -> domain (or local path) {%- endcomment -%}
+                  {%- if event.title-url contains '://' -%}
+                    {%- assign link_target = event.title-url | split: '://' | last | split: '/' | first | remove_first: 'www.' -%}
+                  {%- else -%}
+                    {%- assign link_target = event.title-url | remove_first: '/' -%}
+                  {%- endif %}
+                  <a class="ls-link" href="{{ event.title-url | relative_url }}" target="_blank" rel="noreferrer"><span class="ls-name" data-redact>{{ event.title | slugify }}/</span><span class="ls-arrow"> -&gt; </span><span class="ls-target">{{ link_target }}</span></a>
+                {% else %}
+                  <span class="ls-dir">{{ event.title | slugify }}/</span>
+                {% endif %}
+                <span class="node-date">{{ event.date }}</span>
+              </div>
+              {% if event.subtitle or event.tags %}
+                <ul class="tree">
+                  {% if event.subtitle and event.subtitle != '' %}
+                    <li class="node-desc">{{ event.subtitle }}</li>
+                  {% endif %}
+                  {% if event.tags %}
+                    <li class="node-tags tags">
+                      {% for tag in event.tags %}<span class="tag">#{{ tag.tag | slugify }}</span>{% endfor %}
+                    </li>
+                  {% endif %}
+                </ul>
               {% endif %}
-            </div>
-          </div>
-        </li>
-      {% endif %}
-
-      {% if event.timeline-side == 'right' %}
-        <li>
-          <div class="direction-r">
-            <div class="flag-wrapper">
-              <span class="hexagon"></span>
-              <span class="flag neumorphism-button" data-aos="zoom-in-left">
-                <a href="{{event.title-url}}" target="_blank" rel="noreferrer">
-                  <span>{{event.title}}</span>
-                </a>
-              </span>
-              <span class="time-wrapper" data-aos="zoom-in-left">
-                <span class="time neumorphism-card">{{event.date}}</span>
-              </span>
-            </div>
-            <div class="desc neumorphism-card" data-aos="zoom-in-left">
-              {{event.subtitle}}
-              {% if event.tags %}
-                <div class="tag-wrapper">
-                  {% for tag in event.tags %}
-                    <span class="tag neumorphism-card">{{tag.tag}}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
-<div class="landing-icons"  >
-  <a class="social-link" aria-label="My CV" target="_blank" rel="noreferrer"
-    href="{{site.cv_download_link}}" style="justify-content: center; text-align: center; display:flex">
-    <svg viewBox="0 0 200 200" class="circle">
-      <circle cx="100" cy="100" r="80" />
-    </svg>
-    <div class="social">
-      <svg class="social-svg" viewBox="0 0 48 48">
-        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ '/assets/img/solid.svg#download' | prepend: site.baseurl }}"></use>
-      </svg>
+            </li>
+          {% endfor %}
+          {% if site.cv_download_link %}
+            <li class="tree-node">
+              <div class="node-head">
+                <a class="ls-file cv-link" href="{{ site.cv_download_link | relative_url }}" download><span data-redact>{{ cv_file }}</span></a>
+                <span class="comment">&larr; download cv</span>
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+        <p class="tree-summary">
+          {{ site.data.timeline | size }} directories{% if site.cv_download_link %}, 1 file{% endif %}
+        </p>
+      </div>
     </div>
-    <span class="label" style="font-size: 2rem;">Download CV</span>
-  </a>
-</div>
-<!-- <p class="subtitle">
-</p> -->
+  </div>
+</section>

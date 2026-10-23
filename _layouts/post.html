@@ -1,51 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: base
+body_class: page-post
+---
+{% assign post_file = page.slug | append: '.md' %}
+{% assign post_kb = content | strip_html | size | divided_by: 1024.0 | round: 1 %}
+{% assign read_minutes = content | strip_html | number_of_words | divided_by: 200 | at_least: 1 %}
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>{% if page.title %}{{ page.title }} {% endif %} by {{ site.title }}</title>
-  <meta name="description" content="{{ site.description }}">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ "/assets/favicon/apple-touch-icon.png" | prepend: site.baseurl }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ "/assets/favicon/favicon-32x32.png" | prepend: site.baseurl }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ "/assets/favicon/favicon-16x16.png" | prepend: site.baseurl }}">
-  <link rel="manifest" href="{{ "/assets/favicon/site.webmanifest" | prepend: site.baseurl }}">
-
-  <link rel="stylesheet" href="{{ "/assets/css/main.min.css" | prepend: site.baseurl }}">
-  <link rel="stylesheet" href="{{ "/assets/css/vendors.min.css" | prepend: site.baseurl }}">
-  <link rel="stylesheet" href="{{ "/assets/css/blog.css" | prepend: site.baseurl }}">
-
-  <script src="{{ "/assets/js/vendors.min.js" | prepend: site.baseurl }}"></script>
-  <!-- <script src="{{ "/assets/js/app.min.js" | prepend: site.baseurl }}"></script> -->
-</head>
-
-<body>
-  <!-- <div id="preloader">
-    <div class="load">
-      <hr />
-      <hr />
-      <hr />
-      <hr />
+<article class="post">
+  <header class="post-header term-block" data-term>
+    {% capture post_cmd %}less {{ post_file }}{% endcapture %}
+    {% include prompt.html path="~/writeups" cmd=post_cmd %}
+    <div class="out">
+      <p class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %e, %Y" }}</time>
+        <span class="sep">·</span> {{ post_kb }}K
+        <span class="sep">·</span> ~{{ read_minutes }} min read
+        {% if page.tags %}
+          <span class="sep">·</span>
+          <span class="tags">{% for tag in page.tags %}<span class="tag">#{{ tag.tag | slugify }}</span>{% endfor %}</span>
+        {% endif %}
+      </p>
     </div>
-  </div> -->
-  <div class="layout">
-    {% unless page.no_nav_bar %}
-      {% include navbar.html %}
-    {% endunless %}
+  </header>
 
-    <div id="small_screen_filler"></div>
-
+  <div class="prose">
     {{ content }}
-
-    {%if page.show_contact_card %}
-    <section class="card neumorphism-card-big">
-      {% include section-contact.html %}
-    </section>
-    {% endif %}
   </div>
-  {% include footer.html %}
-</body>
-</html>
+
+  <footer class="post-footer">
+    <p class="eof">(END)</p>
+    <nav class="post-nav" aria-label="Post navigation">
+      <a href="{{ '/#writeups' | relative_url }}"><span class="dim">$</span> cd ../writeups</a>
+      <a href="{{ '/' | relative_url }}"><span class="dim">$</span> cd ~</a>
+    </nav>
+  </footer>
+</article>
+
+{% if page.show_contact_card %}
+  {% include section-contact.html %}
+{% endif %}

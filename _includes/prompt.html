@@ -1,0 +1,9 @@
+{%- comment -%}
+  A decorative shell prompt line: user@host:path$ cmd
+  The command is typed out by terminal.js when the line scrolls into view.
+  include params:
+    cmd   the command shown after the prompt
+    path  working directory, defaults to ~
+{%- endcomment -%}
+{%- assign ps1_user = site.data.pseudonyms[0].name | default: site.username -%}
+<p class="cmd" aria-hidden="true"><span class="ps1"><span class="ps1-user">{{ ps1_user }}</span><span class="ps1-at">@</span><span class="ps1-host">{{ site.username }}</span><span class="ps1-colon">:</span><span class="ps1-path">{{ include.path | default: '~' }}</span><span class="ps1-sign">$</span></span> <span class="cmd-text">{{ include.cmd }}</span></p>

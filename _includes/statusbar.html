@@ -1,0 +1,30 @@
+{%- comment -%}
+  tmux-style status line. On the home page each window is a section; number keys jump to it.
+{%- endcomment -%}
+{% unless page.no_nav_bar %}
+<header class="statusbar">
+  <nav class="tmux" aria-label="Sections">
+    <a class="tmux-session" href="{{ '/' | relative_url }}" aria-label="Home">[{{ site.username }}]</a>
+    <ol class="tmux-windows">
+      {% if page.collection == 'posts' %}
+        <li><a href="{{ '/' | relative_url }}">0:~</a></li>
+        <li><a href="{{ '/#writeups' | relative_url }}">1:writeups</a></li>
+        <li><a href="#main" aria-current="page">2:{{ page.slug }}.md</a></li>
+      {% else %}
+        {% assign n = 0 %}
+        <li><a href="#top" data-window="top" aria-current="true">0:~</a></li>
+        {% if site.show_aboutme_card %}{% assign n = n | plus: 1 %}<li><a href="#about" data-window="about">{{ n }}:about</a></li>{% endif %}
+        {% if site.show_timeline_card %}{% assign n = n | plus: 1 %}<li><a href="#experience" data-window="experience">{{ n }}:experience</a></li>{% endif %}
+        {% if site.show_skills_card %}{% assign n = n | plus: 1 %}<li><a href="#skills" data-window="skills">{{ n }}:skills</a></li>{% endif %}
+        {% if site.show_blogs_card %}{% assign n = n | plus: 1 %}<li><a href="#writeups" data-window="writeups">{{ n }}:writeups</a></li>{% endif %}
+        {% if site.show_projects_card %}{% assign n = n | plus: 1 %}<li><a href="#projects" data-window="projects">{{ n }}:projects</a></li>{% endif %}
+        {% if site.show_contact_card %}{% assign n = n | plus: 1 %}<li><a href="#contact" data-window="contact">{{ n }}:contact</a></li>{% endif %}
+      {% endif %}
+    </ol>
+  </nav>
+  <p class="tmux-right" aria-hidden="true">
+    <span class="tmux-host">"{{ site.username }}"</span>
+    <time data-clock>{{ site.time | date: "%H:%M %d-%b-%y" }}</time>
+  </p>
+</header>
+{% endunless %}

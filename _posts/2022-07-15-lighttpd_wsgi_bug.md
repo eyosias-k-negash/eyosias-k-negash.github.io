@@ -9,7 +9,7 @@ live: true
 tldr: A potential Auth Bypass bug when an application is setup behind a reverse proxy that handles the authentication...
 tags:
   - tag: Infosec
-  - tag: Vunleribility Research
+  - tag: Vulnerability Research
 ---
 
 # An Auth Bypass Bug saved on a Technicality
