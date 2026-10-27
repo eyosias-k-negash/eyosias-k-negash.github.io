@@ -6,15 +6,41 @@ body_class: page-post
 {% assign post_kb = content | strip_html | size | divided_by: 1024.0 | round: 1 %}
 {% assign read_minutes = content | strip_html | number_of_words | divided_by: 200 | at_least: 1 %}
 
+{%- comment -%}
+  Posts sharing a folder under _posts are chapters of one blog, in date order.
+  Unlisted chapters are left out, except this page so a draft can be previewed.
+{%- endcomment -%}
+{%- assign post_dirs = page.path | remove_first: '_posts/' | split: '/' -%}
+{%- assign post_path = '~/writeups' -%}
+{%- assign chapters = '' | split: '' -%}
+{%- if post_dirs.size > 1 -%}
+  {%- assign post_path = post_path | append: '/' | append: post_dirs.first -%}
+  {%- assign series_dir = '_posts/' | append: post_dirs.first | append: '/' -%}
+  {%- assign series_posts = site.posts | where_exp: 'p', 'p.path contains series_dir' | reverse -%}
+  {%- for p in series_posts -%}
+    {%- if p.live or p.path == page.path -%}{%- assign chapters = chapters | push: p -%}{%- endif -%}
+  {%- endfor -%}
+  {%- for p in chapters -%}
+    {%- if p.path == page.path -%}{%- assign chapter_index = forloop.index0 -%}{%- endif -%}
+  {%- endfor -%}
+  {%- assign chapter_no = chapter_index | plus: 1 -%}
+  {%- assign prev_index = chapter_index | minus: 1 -%}
+  {%- if chapter_index > 0 -%}{%- assign prev_chapter = chapters[prev_index] -%}{%- endif -%}
+  {%- assign next_chapter = chapters[chapter_no] -%}
+{%- endif -%}
+
 <article class="post">
   <header class="post-header term-block" data-term>
     {% capture post_cmd %}less {{ post_file }}{% endcapture %}
-    {% include prompt.html path="~/writeups" cmd=post_cmd %}
+    {% include prompt.html path=post_path cmd=post_cmd %}
     <div class="out">
       <p class="post-meta">
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %e, %Y" }}</time>
         <span class="sep">·</span> {{ post_kb }}K
         <span class="sep">·</span> ~{{ read_minutes }} min read
+        {% if chapters.size > 1 %}
+          <span class="sep">·</span> ch. {{ chapter_no }}/{{ chapters.size }}
+        {% endif %}
         {% if page.tags %}
           <span class="sep">·</span>
           <span class="tags">{% for tag in page.tags %}<span class="tag">#{{ tag.tag | slugify }}</span>{% endfor %}</span>
@@ -29,6 +55,22 @@ body_class: page-post
 
   <footer class="post-footer">
     <p class="eof">(END)</p>
+    {% if chapters.size > 1 %}
+      <nav class="chapter-nav" aria-label="Chapters">
+        {% if prev_chapter %}
+          <a class="chapter-prev" rel="prev" href="{{ prev_chapter.url | relative_url }}">
+            <span class="chapter-nav-label"><span class="chapter-nav-key" aria-hidden="true">:p</span> previous chapter</span>
+            <span class="chapter-nav-title"><span class="chapter-no">{{ chapter_index | prepend: '0' | slice: -2, 2 }}</span> {{ prev_chapter.title }}</span>
+          </a>
+        {% endif %}
+        {% if next_chapter %}
+          <a class="chapter-next" rel="next" href="{{ next_chapter.url | relative_url }}">
+            <span class="chapter-nav-label">next chapter <span class="chapter-nav-key" aria-hidden="true">:n</span></span>
+            <span class="chapter-nav-title"><span class="chapter-no">{{ chapter_no | plus: 1 | prepend: '0' | slice: -2, 2 }}</span> {{ next_chapter.title }}</span>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
     <nav class="post-nav" aria-label="Post navigation">
       <a href="{{ '/#writeups' | relative_url }}"><span class="dim">$</span> cd ../writeups</a>
       <a href="{{ '/' | relative_url }}"><span class="dim">$</span> cd ~</a>

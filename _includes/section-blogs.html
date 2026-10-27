@@ -1,16 +1,55 @@
 {%- assign live_posts = site.posts | where: 'live', true -%}
-<section id="writeups" class="section" data-window>
-  <div class="pane">
-    <span class="glass" aria-hidden="true"></span>
-    <div class="term-block" data-term>
-      {% include prompt.html cmd="ls -l ~/writeups" %}
-      <div class="out">
-        <h2 class="out-title"><span class="hash" aria-hidden="true"># </span>{{ site.blogs_title }}</h2>
-        <p class="ls-total">total {{ live_posts | size }}</p>
-        <ul class="ls-long">
+{%- comment -%}
+  A folder under _posts holding two or more live posts is one blog told in
+  chapters. It lists once, as a directory, in the spot of its newest chapter.
+{%- endcomment -%}
+{%- assign entry_count = 0 -%}
+{%- assign listed_series = '' -%}
+{%- capture entries -%}
           {% for post in live_posts %}
-            {%- assign post_kb = post.content | strip_html | size | divided_by: 1024.0 | round: 1 -%}
-            {%- assign post_group = post.tags[0].tag | default: 'notes' | slugify -%}
+            {%- assign post_dirs = post.path | remove_first: '_posts/' | split: '/' -%}
+            {%- assign chapters = '' | split: '' -%}
+            {%- if post_dirs.size > 1 -%}
+              {%- assign series_dir = '_posts/' | append: post_dirs.first | append: '/' -%}
+              {%- assign chapters = live_posts | where_exp: 'p', 'p.path contains series_dir' | reverse -%}
+            {%- endif -%}
+            {%- if chapters.size > 1 -%}
+              {%- assign series_marker = '/' | append: post_dirs.first | append: '/' -%}
+              {%- if listed_series contains series_marker -%}{%- continue -%}{%- endif -%}
+              {%- assign listed_series = listed_series | append: series_marker -%}
+              {%- assign entry_count = entry_count | plus: 1 -%}
+              {%- assign series_title = chapters | map: 'series_title' | compact | first | default: post_dirs.first -%}
+              {%- assign series_tldr = chapters | map: 'series_tldr' | compact | first | default: chapters.first.tldr -%}
+              {%- assign series_tags = chapters | map: 'tags' | compact | map: 'tag' | uniq -%}
+              {%- assign series_group = series_tags.first | default: 'notes' | slugify -%}
+              {%- assign series_bytes = 0 -%}
+              {%- for chapter in chapters -%}
+                {%- assign series_bytes = chapter.content | strip_html | size | plus: series_bytes -%}
+              {%- endfor -%}
+              {%- assign series_kb = series_bytes | divided_by: 1024.0 | round: 1 -%}
+            <li class="ls-entry ls-series">
+              <span class="ls-meta" aria-hidden="true">
+                <span class="ls-perm">drwxr-xr-x</span>
+                <span class="ls-owner">{{ site.username }} {{ series_group }}</span>
+                <span class="ls-size">{{ series_kb }}K</span>
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %e %Y" }}</time>
+                <span class="ls-name ls-dir">{{ post_dirs.first }}/</span>
+              </span>
+              <a class="ls-series-link" href="{{ chapters.first.url | relative_url }}"><span class="ls-title" data-redact>{{ series_title }}</span></a>
+              {% if series_tldr %}<span class="ls-desc">{{ series_tldr }}</span>{% endif %}
+              <span class="ls-chapters tags">
+                {% for chapter in chapters %}<a class="chapter" href="{{ chapter.url | relative_url }}"{% if chapter.chapter_title %} title="{{ chapter.title | escape }}"{% endif %}><span class="chapter-no">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ chapter.chapter_title | default: chapter.title }}</a>{% endfor %}
+              </span>
+              {% if series_tags.size > 0 %}
+                <span class="ls-tags tags">
+                  {% for tag in series_tags %}<span class="tag">#{{ tag | slugify }}</span>{% endfor %}
+                </span>
+              {% endif %}
+            </li>
+            {%- else -%}
+              {%- assign entry_count = entry_count | plus: 1 -%}
+              {%- assign post_kb = post.content | strip_html | size | divided_by: 1024.0 | round: 1 -%}
+              {%- assign post_group = post.tags[0].tag | default: 'notes' | slugify -%}
             <li>
               <a class="ls-entry" href="{{ post.url | relative_url }}">
                 <span class="ls-meta" aria-hidden="true">
@@ -29,7 +68,19 @@
                 {% endif %}
               </a>
             </li>
+            {%- endif -%}
           {% endfor %}
+{%- endcapture -%}
+<section id="writeups" class="section" data-window>
+  <div class="pane">
+    <span class="glass" aria-hidden="true"></span>
+    <div class="term-block" data-term>
+      {% include prompt.html cmd="ls -l ~/writeups" %}
+      <div class="out">
+        <h2 class="out-title"><span class="hash" aria-hidden="true"># </span>{{ site.blogs_title }}</h2>
+        <p class="ls-total">total {{ entry_count }}</p>
+        <ul class="ls-long">
+          {{ entries }}
         </ul>
       </div>
     </div>
