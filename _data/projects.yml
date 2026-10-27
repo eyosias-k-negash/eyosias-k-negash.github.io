@@ -2,6 +2,7 @@
 # > descr: Description of your project
 # > demo: Link to your project
 # > tags: List of technologies you used in your projects
+# > date: (optional) When you created it, e.g. 2026-09-01; marks it "new" for new_badge_months (see _config.yml)
 #
 # Example of a project
 # - name: project X

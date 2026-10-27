@@ -35,7 +35,10 @@
                 <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %e %Y" }}</time>
                 <span class="ls-name ls-dir">{{ post_dirs.first }}/</span>
               </span>
-              <a class="ls-series-link" href="{{ chapters.first.url | relative_url }}"><span class="ls-title" data-redact>{{ series_title }}</span></a>
+              <span class="ls-head">
+                <a class="ls-series-link" href="{{ chapters.first.url | relative_url }}"><span class="ls-title" data-redact>{{ series_title }}</span></a>
+                {% include new-badge.html date=post.date %}
+              </span>
               {% if series_tldr %}<span class="ls-desc">{{ series_tldr }}</span>{% endif %}
               <span class="ls-chapters tags">
                 {% for chapter in chapters %}<a class="chapter" href="{{ chapter.url | relative_url }}"{% if chapter.chapter_title %} title="{{ chapter.title | escape }}"{% endif %}><span class="chapter-no">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ chapter.chapter_title | default: chapter.title }}</a>{% endfor %}
@@ -59,7 +62,10 @@
                   <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %e %Y" }}</time>
                   <span class="ls-name">{{ post.slug }}.md</span>
                 </span>
-                <span class="ls-title" data-redact>{{ post.title }}</span>
+                <span class="ls-head">
+                  <span class="ls-title" data-redact>{{ post.title }}</span>
+                  {% include new-badge.html date=post.date %}
+                </span>
                 {% if post.tldr %}<span class="ls-desc">{{ post.tldr }}</span>{% endif %}
                 {% if post.tags %}
                   <span class="ls-tags tags">

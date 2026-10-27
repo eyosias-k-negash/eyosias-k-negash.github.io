@@ -179,6 +179,21 @@ button { font: inherit; }
   white-space: nowrap;
 }
 
+/* Published or created within site.new_badge_months; green like git's "new file:" */
+.new-badge {
+  flex: none;
+  padding: 0 0.6ch;
+  border-radius: 3px;
+  background: var(--green-color);
+  color: var(--bg);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 /* Layout
    ========================================================================== */
 
@@ -822,6 +837,13 @@ section:target > .pane > .glass,
   transition: color 0.2s;
 }
 
+.ls-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 1.5ch;
+}
+
 .ls-entry:hover .ls-title { color: var(--pseudonym-color); }
 
 .ls-desc { max-width: 76ch; }
@@ -948,6 +970,16 @@ section:target > .pane > .glass,
   color: inherit;
 }
 .panel:hover .panel-title a { color: var(--pseudonym-color); }
+
+/* The badge sits on the top border opposite the title, which gives it room. */
+.panel > .new-badge {
+  position: absolute;
+  top: 0;
+  right: 0.75rem;
+  transform: translateY(-50%);
+}
+
+.panel:has(> .new-badge) > .panel-title { max-width: calc(100% - 5rem); }
 
 .panel-desc { flex: 1; }
 

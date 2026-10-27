@@ -1,0 +1,18 @@
+{%- comment -%}
+  A "new" badge for anything dated within the last site.new_badge_months months.
+  include.date: when it was published or created (a post's date, a repo's created_at).
+  GitHub Pages only rebuilds on push, so terminal.js also drops badges that have
+  aged out since the build.
+{%- endcomment -%}
+{%- assign new_months = site.new_badge_months | default: 0 -%}
+{%- if include.date and new_months > 0 -%}
+  {%- assign new_since = include.date | date: '%Y-%m-%d' -%}
+  {%- assign build_month = site.time | date: '%m' | plus: 0 -%}
+  {%- assign cutoff_months = site.time | date: '%Y' | times: 12 | plus: build_month | minus: 1 | minus: new_months -%}
+  {%- assign cutoff_year = cutoff_months | divided_by: 12 -%}
+  {%- assign cutoff_month = cutoff_months | modulo: 12 | plus: 101 | slice: 1, 2 -%}
+  {%- capture new_cutoff -%}{{ cutoff_year }}-{{ cutoff_month }}-{{ site.time | date: '%d' }}{%- endcapture -%}
+  {%- if new_since >= new_cutoff -%}
+    <span class="new-badge" data-new-since="{{ new_since }}" data-new-months="{{ new_months }}">new</span>
+  {%- endif -%}
+{%- endif -%}

@@ -27,6 +27,10 @@ Optional front matter, read from the first chapter that sets it:
 
 Per chapter, `chapter_title` is an optional short name for that chapter's link in the listing; the chapter page itself keeps using `title`.
 
+### "new" badges
+
+Write-ups published, and GitHub repos created, within the last `new_badge_months` (in `_config.yml`, default 5) get a green `NEW` badge. A blog in chapters counts as new while its latest chapter does. Hand-written projects in `_data/projects.yml` take an optional `date:` for the same. The badge is decided at build time, and `terminal.js` removes it in the browser once it has aged out, so it stays right between rebuilds.
+
 ## Theme
 
 - `_layouts/base.html` is the page shell; `default.html` (home) and `post.html` build on it.

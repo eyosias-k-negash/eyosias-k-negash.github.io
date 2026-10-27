@@ -14,6 +14,7 @@
             {% for project in site.data.projects %}
               <li class="panel">
                 <h3 class="panel-title">{{ project.name }}</h3>
+                {% include new-badge.html date=project.date %}
                 <p class="panel-desc">{{ project.descr }}</p>
                 {% if project.tags %}
                   <p class="panel-tags tags">{% for tag in project.tags %}<span class="tag">#{{ tag.tag | slugify }}</span>{% endfor %}</p>
@@ -52,6 +53,7 @@
             {% assign repo_count = repo_count | plus: 1 %}
             <li class="panel">
               <h3 class="panel-title"><a href="{{ repository.html_url }}" target="_blank" rel="noreferrer" data-redact>{{ repository.name }}</a></h3>
+              {% include new-badge.html date=repository.created_at %}
               {% if repository.description and repository.description != '' %}
                 <p class="panel-desc">{{ repository.description }}</p>
               {% else %}

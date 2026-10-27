@@ -135,6 +135,11 @@ show_blogs_card: true
 # blogs_title: The will be displayed as the title in the Blogs section
 blogs_title: Technical Write-ups
 
+# NEW BADGE
+# new_badge_months: Write-ups published, and projects created, within this many months get a "new" badge.
+# > set this to 0 to turn the badge off
+new_badge_months: 5
+
 ### END OF VALUES YOU SHOULD CHANGE ###
 
 plugins:
