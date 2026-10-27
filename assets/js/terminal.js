@@ -90,6 +90,17 @@
     blocks.forEach(function (block) { io.observe(block); });
   }
 
+  /* "new" badges are decided at build time, but GitHub Pages only rebuilds on
+     push: drop the ones that have aged out since (see _includes/new-badge.html). */
+
+  function initNewBadges() {
+    document.querySelectorAll('[data-new-since]').forEach(function (badge) {
+      var until = new Date(badge.getAttribute('data-new-since') + 'T00:00:00');
+      until.setMonth(until.getMonth() + parseInt(badge.getAttribute('data-new-months'), 10));
+      if (!(Date.now() < until)) badge.remove();
+    });
+  }
+
   /* Role line: types and deletes each entry in turn */
 
   function TxtRotate(el, lines, period) {
@@ -404,6 +415,7 @@
 
   function init() {
     root.classList.add('term-ready');
+    initNewBadges();
     initTyping();
     initRotate();
     initAlias();

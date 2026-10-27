@@ -1,13 +1,13 @@
 ---
 layout: post
 title: From a phone app to a cluster
+chapter_title: origin
+series_title: "Ivyk8: a desktop view of a phone app"
+series_tldr: A serialized account of building Ivyk8, a read-only desktop dashboard for an Android money manager's backups, on Kubernetes. One post per feature, plus short posts when the cluster misbehaves.
 show_contact_card: true
 no_nav_bar: false
 live: true
-tldr: I forked an archived Android money manager, then wanted a desktop view of its backups. The first plan was a platform with a dozen moving parts. The version that shipped is three stateless services and no database.
-series: ivy-wallet-plus
-kind: chapter
-order: 1
+tldr: The first Ivyk8 blueprint was a flagship platform that a critique sized at 18 months of work for a team. This chapter covers the Android fork it grew from, the critique, and the cut to three stateless services.
 tags:
   - tag: Kubernetes
   - tag: DevOps
@@ -15,7 +15,6 @@ tags:
   - tag: Claude Code
 ---
 
-<!-- Draft from blog/ARC.md chapter `origin`. Search for TODO before posting: each one is a fact to check or a gap only the author can fill. Delete this comment too. -->
 
 ## TL;DR
 - **Ivyk8** is Ivy + k8s: a read-only desktop dashboard for the backups my phone app writes to Google Drive.
@@ -25,7 +24,7 @@ tags:
 
 ## Where it starts: a phone app I couldn't leave alone
 
-Ivy Wallet is an open-source money manager for Android. Its owner archived it on Nov 5, 2024. <!-- TODO verify the archive date on the upstream repo -->  I wanted to keep using it, so I forked it as [Ivy Wallet+](https://github.com/eyosias-k-negash/ivy-wallet-plus) and added what I was missing.
+Ivy Wallet is an open-source money manager for Android. Its owner archived it on Nov 5, 2024.  I wanted to keep using it, so I forked it as [Ivy Wallet+](https://github.com/eyosias-k-negash/ivy-wallet-plus) and added what I was missing.
 
 The additions, in the order I made them in late August:
 
@@ -39,9 +38,7 @@ None of that is this blog's subject. It matters because of what it did to the da
 
 ## The gap
 
-Ivy Wallet+ already writes its backups to Google Drive. That file is the whole interface between the phone and anything else. So the idea was small: read the backup, show it on a desktop screen with charts the app can't draw.
-
-<!-- TODO author: in your own words, what did you want to see that the app couldn't show? One or two sentences. This is the "why" of the whole series and the notes don't have it. -->
+Ivy Wallet+ already writes its backups to Google Drive. That file is the whole interface between the phone and anything else. So the idea was small: read the backup, show it on a desktop screen with charts the app can't draw, and see trends, averages, and projections of expenses and incomes.
 
 ## The first blueprint was too big
 
@@ -83,8 +80,6 @@ I cut in two stages.
 | 0005 | Exchange rates come from the ECB, with a fallback source for currencies the ECB doesn't publish. |
 
 The reasoning behind 0001 is the part to keep. The analytics are computed in memory from one file. Timezone and rate overrides are request parameters. Nothing needs to persist between requests, so nothing gets a database. On a cache miss, drive-sync re-uploads the backup to analytics. That is a feature, not a shortcut: stateless services can be killed, replicated and rolled without ceremony. I did not know yet how much I would lean on that.
-
-<!-- TODO author: decide whether to mention ADR 0005's reason (a local currency the ECB doesn't publish). It would tell readers which country you're in. Left out on purpose. -->
 
 ## The goal
 

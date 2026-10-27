@@ -179,6 +179,21 @@ button { font: inherit; }
   white-space: nowrap;
 }
 
+/* Published or created within site.new_badge_months; green like git's "new file:" */
+.new-badge {
+  flex: none;
+  padding: 0 0.6ch;
+  border-radius: 3px;
+  background: var(--green-color);
+  color: var(--bg);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 /* Layout
    ========================================================================== */
 
@@ -822,9 +837,72 @@ section:target > .pane > .glass,
   transition: color 0.2s;
 }
 
+.ls-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 1.5ch;
+}
+
 .ls-entry:hover .ls-title { color: var(--pseudonym-color); }
 
 .ls-desc { max-width: 76ch; }
+
+/* A blog in chapters lists as a directory. Its title link stretches over the
+   whole entry; the chapter links sit above it, with the gaps between them
+   falling through to the title link. */
+.ls-series { position: relative; }
+
+.ls-series:focus-within {
+  background: rgba(255, 255, 255, 0.04);
+  border-left-color: var(--pseudonym-color);
+}
+
+.ls-meta .ls-dir { color: var(--blue-color); }
+
+.ls-series-link {
+  justify-self: start;
+  color: inherit;
+  outline: none;
+}
+
+.ls-series-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.ls-series-link:focus-visible .ls-title { color: var(--pseudonym-color); }
+
+.ls-chapters {
+  position: relative;
+  z-index: 1;
+  gap: 0.15rem 2.5ch;
+  pointer-events: none;
+}
+
+.chapter {
+  max-width: 100%;
+  padding: 0 0.25ch;
+  margin: 0 -0.25ch;
+  overflow: hidden;
+  color: var(--fg);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.chapter-no { color: var(--blue-color); }
+
+.chapter:hover,
+.chapter:focus-visible {
+  background: var(--pseudonym-color);
+  color: var(--bg);
+  outline: none;
+}
+
+.chapter:hover .chapter-no,
+.chapter:focus-visible .chapter-no { color: inherit; }
 
 @media (max-width: 40rem) {
   .ls-perm,
@@ -892,6 +970,16 @@ section:target > .pane > .glass,
   color: inherit;
 }
 .panel:hover .panel-title a { color: var(--pseudonym-color); }
+
+/* The badge sits on the top border opposite the title, which gives it room. */
+.panel > .new-badge {
+  position: absolute;
+  top: 0;
+  right: 0.75rem;
+  transform: translateY(-50%);
+}
+
+.panel:has(> .new-badge) > .panel-title { max-width: calc(100% - 5rem); }
 
 .panel-desc { flex: 1; }
 
@@ -1181,6 +1269,55 @@ section:target > .pane > .glass,
   padding: 0 0.75ch;
   background: var(--fg-bright);
   color: var(--bg);
+}
+
+/* Previous / next chapter, keyed like less's :p and :n */
+.chapter-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.chapter-nav a {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid var(--line-strong);
+  color: var(--fg-bright);
+  transition: border-color 0.2s;
+}
+
+.chapter-nav a:hover,
+.chapter-nav a:focus-visible {
+  border-color: var(--pseudonym-color);
+  outline: none;
+}
+
+.chapter-next {
+  grid-column: 2;
+  text-align: right;
+}
+
+.chapter-nav-label {
+  color: var(--fg-dim);
+  font-size: 0.8125rem;
+}
+
+.chapter-nav-key { color: var(--pseudonym-color); }
+
+.chapter-nav-title {
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.chapter-nav a:hover .chapter-nav-title,
+.chapter-nav a:focus-visible .chapter-nav-title { color: var(--pseudonym-color); }
+
+@media (max-width: 40rem) {
+  .chapter-nav { grid-template-columns: 1fr; }
+  .chapter-next { grid-column: auto; }
 }
 
 .post-nav {
