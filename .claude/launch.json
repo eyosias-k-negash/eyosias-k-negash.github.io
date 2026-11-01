@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "badge-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4917", "-d", "/tmp/claude-1000/-home-rega-eyosias-k-negash-github-io/a8b00378-d88d-474e-b8f8-a8506620ba0e/scratchpad/site"],
+      "port": 4917
+    }
+  ]
+}
