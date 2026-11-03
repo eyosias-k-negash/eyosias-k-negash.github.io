@@ -16,8 +16,6 @@ tags:
   - tag: Claude Code
 ---
 
-<!-- Interlude B, from blog/INTERLUDES.md. Search for TODO before posting; delete this comment too. File: _posts/ivk8/2026-10-29-the-packet-that-knew-the-wrong-address.md. Sorts after interlude A (10-28) and before `real-backup` (10-30). TODO: link "Onto real hardware" (context line and footer) and interlude A once their URLs are known. -->
-
 ## TL;DR
 - **Symptom:** on a three-node kubeadm cluster, pod traffic between nodes died. Every Calico health signal stayed green, and moving Traefik to another node changed nothing.
 - **Cause:** two nodes had more than one address. Calico announced one, the kernel sent tunnel packets from another, and Felix dropped them as coming from a host it didn't know.
@@ -232,5 +230,3 @@ The pin fixed the tunnel. It didn't fix the address the control plane itself dep
 ---
 
 Back to the story: *Onto real hardware*. The previous interlude is *nginx can't read its own config*, and the next chapter is *The real backup*.
-
-*Built with Claude Code as a pair. What I directed, checked and changed is in the story.*
