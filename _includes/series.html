@@ -1,0 +1,39 @@
+{%- comment -%}
+  Finds the blog told in chapters that include.post belongs to, if any.
+  A folder under _posts is one blog. The posts directly inside it are its
+  chapters; the posts in its interludes/ folder are side stories that sit
+  between chapters and are kept out of the chapter numbering. Nothing deeper
+  is scanned. Unlisted posts are left out, except include.post itself so a
+  draft can be previewed.
+
+  Sets, for the caller:
+    series_dir         the folder's name, blank if the post isn't in a blog
+    series_role        'chapter', 'interlude', or blank
+    series_chapters    the blog's chapters, oldest first
+    series_interludes  the blog's interludes, oldest first
+{%- endcomment -%}
+{%- assign series_post = include.post -%}
+{%- assign series_parts = series_post.path | remove_first: '_posts/' | split: '/' -%}
+{%- assign series_dir = '' -%}
+{%- assign series_role = '' -%}
+{%- assign series_chapters = '' | split: '' -%}
+{%- assign series_interludes = '' | split: '' -%}
+{%- if series_parts.size == 2 -%}
+  {%- assign series_role = 'chapter' -%}
+{%- elsif series_parts.size == 3 and series_parts[1] == 'interludes' -%}
+  {%- assign series_role = 'interlude' -%}
+{%- endif -%}
+{%- if series_role != '' -%}
+  {%- assign series_dir = series_parts.first -%}
+  {%- assign series_prefix = '_posts/' | append: series_dir | append: '/' -%}
+  {%- assign series_posts = site.posts | where_exp: 'p', 'p.path contains series_prefix' | reverse -%}
+  {%- for p in series_posts -%}
+    {%- unless p.live or p.path == series_post.path -%}{%- continue -%}{%- endunless -%}
+    {%- assign p_parts = p.path | remove_first: series_prefix | split: '/' -%}
+    {%- if p_parts.size == 1 -%}
+      {%- assign series_chapters = series_chapters | push: p -%}
+    {%- elsif p_parts.size == 2 and p_parts.first == 'interludes' -%}
+      {%- assign series_interludes = series_interludes | push: p -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

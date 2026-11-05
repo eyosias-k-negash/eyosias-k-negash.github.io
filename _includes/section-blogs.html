@@ -1,30 +1,29 @@
 {%- assign live_posts = site.posts | where: 'live', true -%}
 {%- comment -%}
-  A folder under _posts holding two or more live posts is one blog told in
-  chapters. It lists once, as a directory, in the spot of its newest chapter.
+  A folder under _posts holding two or more live chapters is one blog told in
+  chapters (see series.html). It lists once, as a directory, in the spot of its
+  newest chapter. Its interludes aren't listed, though they count to its size.
 {%- endcomment -%}
 {%- assign entry_count = 0 -%}
 {%- assign listed_series = '' -%}
 {%- capture entries -%}
           {% for post in live_posts %}
-            {%- assign post_dirs = post.path | remove_first: '_posts/' | split: '/' -%}
-            {%- assign chapters = '' | split: '' -%}
-            {%- if post_dirs.size > 1 -%}
-              {%- assign series_dir = '_posts/' | append: post_dirs.first | append: '/' -%}
-              {%- assign chapters = live_posts | where_exp: 'p', 'p.path contains series_dir' | reverse -%}
-            {%- endif -%}
+            {%- include series.html post=post -%}
+            {%- if series_role == 'interlude' -%}{%- continue -%}{%- endif -%}
+            {%- assign chapters = series_chapters -%}
             {%- if chapters.size > 1 -%}
-              {%- assign series_marker = '/' | append: post_dirs.first | append: '/' -%}
+              {%- assign series_marker = '/' | append: series_dir | append: '/' -%}
               {%- if listed_series contains series_marker -%}{%- continue -%}{%- endif -%}
               {%- assign listed_series = listed_series | append: series_marker -%}
               {%- assign entry_count = entry_count | plus: 1 -%}
-              {%- assign series_title = chapters | map: 'series_title' | compact | first | default: post_dirs.first -%}
+              {%- assign series_title = chapters | map: 'series_title' | compact | first | default: series_dir -%}
               {%- assign series_tldr = chapters | map: 'series_tldr' | compact | first | default: chapters.first.tldr -%}
               {%- assign series_tags = chapters | map: 'tags' | compact | map: 'tag' | uniq -%}
               {%- assign series_group = series_tags.first | default: 'notes' | slugify -%}
               {%- assign series_bytes = 0 -%}
-              {%- for chapter in chapters -%}
-                {%- assign series_bytes = chapter.content | strip_html | size | plus: series_bytes -%}
+              {%- assign series_files = chapters | concat: series_interludes -%}
+              {%- for file in series_files -%}
+                {%- assign series_bytes = file.content | strip_html | size | plus: series_bytes -%}
               {%- endfor -%}
               {%- assign series_kb = series_bytes | divided_by: 1024.0 | round: 1 -%}
             <li class="ls-entry ls-series">
@@ -33,7 +32,7 @@
                 <span class="ls-owner">{{ site.username }} {{ series_group }}</span>
                 <span class="ls-size">{{ series_kb }}K</span>
                 <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %e %Y" }}</time>
-                <span class="ls-name ls-dir">{{ post_dirs.first }}/</span>
+                <span class="ls-name ls-dir">{{ series_dir }}/</span>
               </span>
               <span class="ls-head">
                 <a class="ls-series-link" href="{{ chapters.first.url | relative_url }}"><span class="ls-title" data-redact>{{ series_title }}</span></a>
