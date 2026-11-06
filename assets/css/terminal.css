@@ -1320,6 +1320,29 @@ section:target > .pane > .glass,
   .chapter-next { grid-column: auto; }
 }
 
+/* The interludes told after a chapter, as a `tree` of its interludes/ folder */
+.interlude-nav { margin-top: 1.5rem; }
+
+.interlude-nav .tree-root .comment { font-weight: 400; }
+
+.interlude {
+  padding: 0 0.25ch;
+  margin: 0 -0.25ch;
+  color: var(--fg);
+}
+
+a.interlude:hover,
+a.interlude:focus-visible {
+  background: var(--pseudonym-color);
+  color: var(--bg);
+  outline: none;
+}
+
+.interlude-here {
+  color: var(--fg-bright);
+  font-weight: 700;
+}
+
 .post-nav {
   display: flex;
   flex-wrap: wrap;

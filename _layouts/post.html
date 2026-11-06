@@ -7,26 +7,50 @@ body_class: page-post
 {% assign read_minutes = content | strip_html | number_of_words | divided_by: 200 | at_least: 1 %}
 
 {%- comment -%}
-  Posts sharing a folder under _posts are chapters of one blog, in date order.
-  Unlisted chapters are left out, except this page so a draft can be previewed.
+  Chapters of a blog (see series.html) link to each other in date order.
+  An interlude belongs to the last chapter dated on or before it: it's listed
+  at the end of that chapter, and links back to it and on to the next one.
+  chapter_index is this chapter's, or for an interlude the one it belongs to
+  (-1 if it predates them all).
 {%- endcomment -%}
-{%- assign post_dirs = page.path | remove_first: '_posts/' | split: '/' -%}
+{%- include series.html post=page -%}
 {%- assign post_path = '~/writeups' -%}
-{%- assign chapters = '' | split: '' -%}
-{%- if post_dirs.size > 1 -%}
-  {%- assign post_path = post_path | append: '/' | append: post_dirs.first -%}
-  {%- assign series_dir = '_posts/' | append: post_dirs.first | append: '/' -%}
-  {%- assign series_posts = site.posts | where_exp: 'p', 'p.path contains series_dir' | reverse -%}
-  {%- for p in series_posts -%}
-    {%- if p.live or p.path == page.path -%}{%- assign chapters = chapters | push: p -%}{%- endif -%}
-  {%- endfor -%}
-  {%- for p in chapters -%}
-    {%- if p.path == page.path -%}{%- assign chapter_index = forloop.index0 -%}{%- endif -%}
-  {%- endfor -%}
+{%- assign chapters = series_chapters -%}
+{%- assign interludes = '' | split: '' -%}
+{%- if series_dir != '' -%}
+  {%- assign post_path = post_path | append: '/' | append: series_dir -%}
+  {%- assign chapter_index = -1 -%}
+  {%- if series_role == 'interlude' -%}
+    {%- assign post_path = post_path | append: '/interludes' -%}
+    {%- assign page_time = page.date | date: '%s' | plus: 0 -%}
+    {%- for p in chapters -%}
+      {%- assign p_time = p.date | date: '%s' | plus: 0 -%}
+      {%- if p_time <= page_time -%}{%- assign chapter_index = forloop.index0 -%}{%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- for p in chapters -%}
+      {%- if p.path == page.path -%}{%- assign chapter_index = forloop.index0 -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
   {%- assign chapter_no = chapter_index | plus: 1 -%}
   {%- assign prev_index = chapter_index | minus: 1 -%}
-  {%- if chapter_index > 0 -%}{%- assign prev_chapter = chapters[prev_index] -%}{%- endif -%}
+  {%- if chapter_index >= 0 -%}{%- assign this_chapter = chapters[chapter_index] -%}{%- endif -%}
+  {%- if series_role == 'interlude' -%}
+    {%- assign back_chapter = this_chapter -%}
+  {%- elsif chapter_index > 0 -%}
+    {%- assign prev_chapter = chapters[prev_index] -%}
+  {%- endif -%}
   {%- assign next_chapter = chapters[chapter_no] -%}
+
+  {%- assign since_time = 0 -%}
+  {%- if this_chapter -%}{%- assign since_time = this_chapter.date | date: '%s' | plus: 0 -%}{%- endif -%}
+  {%- if next_chapter -%}{%- assign until_time = next_chapter.date | date: '%s' | plus: 0 -%}{%- endif -%}
+  {%- for p in series_interludes -%}
+    {%- assign p_time = p.date | date: '%s' | plus: 0 -%}
+    {%- if p_time < since_time -%}{%- continue -%}{%- endif -%}
+    {%- if next_chapter and p_time >= until_time -%}{%- continue -%}{%- endif -%}
+    {%- assign interludes = interludes | push: p -%}
+  {%- endfor -%}
 {%- endif -%}
 
 <article class="post">
@@ -38,7 +62,9 @@ body_class: page-post
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %e, %Y" }}</time>
         <span class="sep">·</span> {{ post_kb }}K
         <span class="sep">·</span> ~{{ read_minutes }} min read
-        {% if chapters.size > 1 %}
+        {% if series_role == 'interlude' %}
+          <span class="sep">·</span> interlude{% if back_chapter %} after ch. {{ chapter_no }}{% endif %}
+        {% elsif chapters.size > 1 %}
           <span class="sep">·</span> ch. {{ chapter_no }}/{{ chapters.size }}
         {% endif %}
         {% if page.tags %}
@@ -55,9 +81,30 @@ body_class: page-post
 
   <footer class="post-footer">
     <p class="eof">(END)</p>
-    {% if chapters.size > 1 %}
+    {% if interludes.size > 0 %}
+      <nav class="interlude-nav" aria-label="Interludes">
+        <p class="tree-root">interludes/ <span class="comment"># {% if this_chapter %}after ch. {{ chapter_no | prepend: '0' | slice: -2, 2 }}{% else %}before ch. 01{% endif %}</span></p>
+        <ul class="tree">
+          {% for interlude in interludes %}
+            <li>
+              {% if interlude.path == page.path %}
+                <span class="interlude interlude-here" aria-current="page">{{ interlude.title }}</span> <span class="comment">&larr; you are here</span>
+              {% else %}
+                <a class="interlude" href="{{ interlude.url | relative_url }}">{{ interlude.title }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+    {% if back_chapter or prev_chapter or next_chapter %}
       <nav class="chapter-nav" aria-label="Chapters">
-        {% if prev_chapter %}
+        {% if back_chapter %}
+          <a class="chapter-prev" href="{{ back_chapter.url | relative_url }}">
+            <span class="chapter-nav-label"><span class="chapter-nav-key" aria-hidden="true">:p</span> back to chapter</span>
+            <span class="chapter-nav-title"><span class="chapter-no">{{ chapter_no | prepend: '0' | slice: -2, 2 }}</span> {{ back_chapter.title }}</span>
+          </a>
+        {% elsif prev_chapter %}
           <a class="chapter-prev" rel="prev" href="{{ prev_chapter.url | relative_url }}">
             <span class="chapter-nav-label"><span class="chapter-nav-key" aria-hidden="true">:p</span> previous chapter</span>
             <span class="chapter-nav-title"><span class="chapter-no">{{ chapter_index | prepend: '0' | slice: -2, 2 }}</span> {{ prev_chapter.title }}</span>
