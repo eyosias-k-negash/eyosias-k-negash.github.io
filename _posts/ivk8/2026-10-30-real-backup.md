@@ -87,7 +87,7 @@ The tests and the typecheck both ran against the TypeScript source. The containe
 
 The same build line in analytics was left alone, because analytics doesn't use fflate. The trap is still set there, waiting for a dependency that does the same thing.
 
-→ *Interlude: Identifier 'createRequire' has already been declared*
+→ *Interlude: [Identifier 'createRequire' has already been declared](/2026/10/31/identifier-createrequire-has-already-been-declared.html)*
 
 ## Every tab: Internal server error
 
@@ -95,7 +95,7 @@ With drive-sync running again, the backup list loaded and a backup opened. Every
 
 The cause was the JSON inside the zip. It isn't UTF-8. Ivy Wallet+ writes it as UTF-16 with a byte-order mark, and analytics reads JSON bodies as UTF-8. Every upload was rejected before validation began, and a catch-all error handler reported a bad request body as a server crash.
 
-→ *Interlude: The backup that spoke UTF-16*
+→ *Interlude: [The backup that spoke UTF-16](/2026/11/01/the-backup-that-spoke-utf-16.html)*
 
 The fix converts the entry to UTF-8 in drive-sync, right after the unzip. It is the same boundary as before: the encoding is a fact about the file, not about the money.
 
